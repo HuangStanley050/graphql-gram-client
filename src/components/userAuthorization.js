@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import {
   Button,
   Form,
@@ -14,6 +14,7 @@ const UserAuth = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+
   const inputHander = e => {
     switch (e.target.id) {
       case "email":
@@ -32,8 +33,10 @@ const UserAuth = props => {
         break;
     }
   };
+  const submbitHandler = () => {};
+
   const RegisterBox = (
-    <section style={{ width: "420px", margin: "1rem auto" }}>
+    <section style={{width: "420px", margin: "1rem auto"}}>
       <Container>
         <Form>
           <FormGroup>
@@ -76,7 +79,7 @@ const UserAuth = props => {
               placeholder="Retype your password"
             />
           </FormGroup>
-          <Button style={{ marginRight: "2rem" }} size="lg" color="primary">
+          <Button style={{marginRight: "2rem"}} size="lg" color="primary">
             Submit
           </Button>
           <Button size="lg" color="danger">
@@ -86,8 +89,9 @@ const UserAuth = props => {
       </Container>
     </section>
   );
+
   const LoginBox = (
-    <section style={{ width: "420px", margin: "1rem auto" }}>
+    <section style={{width: "420px", margin: "1rem auto"}}>
       <Container>
         <Form>
           <FormGroup>
@@ -110,7 +114,7 @@ const UserAuth = props => {
               placeholder="your password"
             />
           </FormGroup>
-          <Button style={{ marginRight: "2rem" }} size="lg" color="primary">
+          <Button style={{marginRight: "2rem"}} size="lg" color="primary">
             Submit
           </Button>
           <Button size="lg" color="danger">
@@ -120,6 +124,7 @@ const UserAuth = props => {
       </Container>
     </section>
   );
+
   return props.authType === "login" ? LoginBox : RegisterBox;
 };
 
