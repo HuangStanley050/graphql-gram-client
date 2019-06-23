@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   Button,
   Form,
@@ -8,6 +8,8 @@ import {
   FormText,
   Container
 } from "reactstrap";
+import { connect } from "react-redux";
+import { login_start } from "../store/actions/authActions";
 
 const UserAuth = props => {
   const [name, setName] = useState("");
@@ -33,10 +35,17 @@ const UserAuth = props => {
         break;
     }
   };
-  const submbitHandler = () => {};
+  const submbitHandler = e => {
+    e.preventDefault();
+    if (props.authType === "login") {
+      props.login({ email, password });
+      setEmail("");
+      setPassword("");
+    }
+  };
 
   const RegisterBox = (
-    <section style={{width: "420px", margin: "1rem auto"}}>
+    <section style={{ width: "420px", margin: "1rem auto" }}>
       <Container>
         <Form>
           <FormGroup>
@@ -56,6 +65,7 @@ const UserAuth = props => {
               type="email"
               name="email"
               id="email"
+              value={email}
               placeholder="jon_smith@example.com"
             />
           </FormGroup>
@@ -63,6 +73,7 @@ const UserAuth = props => {
             <Label for="password">Password</Label>
             <Input
               onChange={inputHander}
+              value={password}
               type="password"
               name="password"
               id="password"
@@ -79,7 +90,7 @@ const UserAuth = props => {
               placeholder="Retype your password"
             />
           </FormGroup>
-          <Button style={{marginRight: "2rem"}} size="lg" color="primary">
+          <Button style={{ marginRight: "2rem" }} size="lg" color="primary">
             Submit
           </Button>
           <Button size="lg" color="danger">
@@ -91,9 +102,9 @@ const UserAuth = props => {
   );
 
   const LoginBox = (
-    <section style={{width: "420px", margin: "1rem auto"}}>
+    <section style={{ width: "420px", margin: "1rem auto" }}>
       <Container>
-        <Form>
+        <Form onSubmit={submbitHandler}>
           <FormGroup>
             <Label for="email">Email</Label>
             <Input
@@ -101,6 +112,7 @@ const UserAuth = props => {
               type="email"
               name="email"
               id="email"
+              value={email}
               placeholder="jon_smith@example.com"
             />
           </FormGroup>
@@ -111,10 +123,11 @@ const UserAuth = props => {
               type="password"
               name="password"
               id="password"
+              value={password}
               placeholder="your password"
             />
           </FormGroup>
-          <Button style={{marginRight: "2rem"}} size="lg" color="primary">
+          <Button style={{ marginRight: "2rem" }} size="lg" color="primary">
             Submit
           </Button>
           <Button size="lg" color="danger">
@@ -128,4 +141,13 @@ const UserAuth = props => {
   return props.authType === "login" ? LoginBox : RegisterBox;
 };
 
-export default UserAuth;
+const mapDispatchToProps = dispatch => {
+  return {
+    login: userInfo => dispatch(login_start(userInfo))
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(UserAuth);
