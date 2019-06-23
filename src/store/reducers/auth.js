@@ -1,3 +1,4 @@
+import * as actionType from "../actions/actionTypes";
 const initialState = {
   isAuth: false,
   isRegistered: false,
@@ -5,7 +6,21 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  return state;
+  switch (action.type) {
+    case actionType.LOGIN_START:
+      return {
+        ...state,
+        loading: true
+      };
+    case actionType.LOGIN_OKAY:
+      return {
+        ...state,
+        loading: false,
+        isAuth: true
+      };
+    default:
+      return state;
+  }
 };
 
 export default reducer;

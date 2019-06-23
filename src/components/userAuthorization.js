@@ -1,15 +1,7 @@
-import React, { useState } from "react";
-import {
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  FormText,
-  Container
-} from "reactstrap";
-import { connect } from "react-redux";
-import { login_start } from "../store/actions/authActions";
+import React, {useState} from "react";
+import {Button, Form, FormGroup, Label, Input, Container} from "reactstrap";
+import {connect} from "react-redux";
+import {login_start} from "../store/actions/authActions";
 
 const UserAuth = props => {
   const [name, setName] = useState("");
@@ -38,14 +30,14 @@ const UserAuth = props => {
   const submbitHandler = e => {
     e.preventDefault();
     if (props.authType === "login") {
-      props.login({ email, password });
+      props.login({email, password});
       setEmail("");
       setPassword("");
     }
   };
 
   const RegisterBox = (
-    <section style={{ width: "420px", margin: "1rem auto" }}>
+    <section style={{width: "420px", margin: "1rem auto"}}>
       <Container>
         <Form>
           <FormGroup>
@@ -55,6 +47,7 @@ const UserAuth = props => {
               type="text"
               name="name"
               id="name"
+              value={name}
               placeholder="John Smith"
             />
           </FormGroup>
@@ -85,12 +78,13 @@ const UserAuth = props => {
             <Input
               type="password"
               onChange={inputHander}
+              value={password2}
               name="confrimpassword"
               id="confirmpassword"
               placeholder="Retype your password"
             />
           </FormGroup>
-          <Button style={{ marginRight: "2rem" }} size="lg" color="primary">
+          <Button style={{marginRight: "2rem"}} size="lg" color="primary">
             Submit
           </Button>
           <Button size="lg" color="danger">
@@ -102,7 +96,7 @@ const UserAuth = props => {
   );
 
   const LoginBox = (
-    <section style={{ width: "420px", margin: "1rem auto" }}>
+    <section style={{width: "420px", margin: "1rem auto"}}>
       <Container>
         <Form onSubmit={submbitHandler}>
           <FormGroup>
@@ -127,7 +121,7 @@ const UserAuth = props => {
               placeholder="your password"
             />
           </FormGroup>
-          <Button style={{ marginRight: "2rem" }} size="lg" color="primary">
+          <Button style={{marginRight: "2rem"}} size="lg" color="primary">
             Submit
           </Button>
           <Button size="lg" color="danger">
