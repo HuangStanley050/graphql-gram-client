@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Button, Form, FormGroup, Label, Input, Container} from "reactstrap";
 import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
 import {login_start} from "../store/actions/authActions";
 
 const UserAuth = props => {
@@ -8,6 +9,7 @@ const UserAuth = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+  //const [redirectToReferrer, setRedirectReferrer] = useState(false);
 
   const inputHander = e => {
     switch (e.target.id) {
@@ -132,6 +134,10 @@ const UserAuth = props => {
     </section>
   );
 
+  if (props.isAuth) {
+    return <Redirect to="/pictures" />;
+  }
+
   return props.authType === "login" ? LoginBox : RegisterBox;
 };
 
@@ -141,7 +147,13 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+const mapStateToProps = state => {
+  return {
+    isAuth: state.auth.isAuth
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(UserAuth);
