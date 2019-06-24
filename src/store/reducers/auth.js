@@ -18,6 +18,12 @@ const reducer = (state = initialState, action) => {
         loading: false,
         isAuth: true
       };
+    case actionType.LOGOUT:
+      localStorage.removeItem("graphgram-token");
+      return {
+        ...state,
+        isAuth: false
+      };
     default:
       return state;
   }

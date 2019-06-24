@@ -14,3 +14,5 @@ export const login_okay = userInfo => ({
   type: actionType.LOGIN_OKAY,
   userInfo
 });
+
+export const logout = () => ({type: actionType.LOGOUT});
