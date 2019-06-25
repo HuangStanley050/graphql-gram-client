@@ -1,7 +1,7 @@
 import { takeEvery, put } from "redux-saga/effects";
 import * as actionType from "../actions/actionTypes";
 import axios from "axios";
-import { loging_fail, login_okay } from "../actions/authActions.js";
+import { login_fail, login_okay } from "../actions/authActions.js";
 
 const api_path = "http://localhost:4000";
 
@@ -35,6 +35,7 @@ function* authSagaWorker(action) {
     yield localStorage.setItem("graphgram-token", result.data.data.login.token);
     yield put(login_okay(result.data.data.login));
   } catch (err) {
+    yield put(login_fail());
     console.log(err);
   }
 }

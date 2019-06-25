@@ -5,7 +5,7 @@ export const login_start = userInfo => ({
   userInfo
 });
 
-export const loging_fail = message => ({
+export const login_fail = message => ({
   type: actionType.LOGIN_FAIL,
   message
 });
@@ -15,4 +15,4 @@ export const login_okay = userInfo => ({
   userInfo
 });
 
-export const logout = () => ({type: actionType.LOGOUT});
+export const logout = () => ({ type: actionType.LOGOUT });

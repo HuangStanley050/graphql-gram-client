@@ -1,13 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {BrowserRouter as Router} from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
-import {createStore, applyMiddleware, compose, combineReducers} from "redux";
+import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import createSagaMiddleware from "redux-saga";
-import {Provider} from "react-redux";
+import { Provider } from "react-redux";
 import authReducer from "./store/reducers/auth";
-import authSaga from "./store/sagas/authSaga";
+import postReducer from "./store/reducers/post";
+import rootSaga from "./store/sagas/";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
@@ -17,7 +18,8 @@ const composeEnhancers =
     : null || compose;
 const sagaMiddleware = createSagaMiddleware();
 const rootReducer = combineReducers({
-  auth: authReducer
+  auth: authReducer,
+  post: postReducer
 });
 
 const store = createStore(
@@ -25,7 +27,7 @@ const store = createStore(
   composeEnhancers(applyMiddleware(sagaMiddleware))
 );
 
-sagaMiddleware.run(authSaga);
+sagaMiddleware.run(rootSaga);
 
 const app = (
   <Provider store={store}>
