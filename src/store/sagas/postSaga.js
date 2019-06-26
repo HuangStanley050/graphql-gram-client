@@ -1,6 +1,6 @@
 import {takeEvery, put} from "redux-saga/effects";
 import * as actionType from "../actions/actionTypes";
-import {get_post_okay, get_posts_fail} from "../actions/postActions";
+import {get_posts_okay, get_posts_fail} from "../actions/postActions";
 import axios from "axios";
 const api_path = "http://localhost:4000";
 function* postSagaWatcher() {
@@ -30,7 +30,8 @@ function* postSagaWorker(action) {
         `
       }
     });
-    console.log(result);
+    const posts = result.data.data.allposts;
+    yield put(get_posts_okay(posts));
   } catch (err) {
     console.log(err);
   }
