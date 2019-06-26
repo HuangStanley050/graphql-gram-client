@@ -12,7 +12,6 @@ const reducer = (state = initialState, action) => {
         loading: true
       };
     case actionType.GET_POSTS_OKAY:
-      console.log(action.posts);
       return {
         ...state,
         posts: [...action.posts],

@@ -1,9 +1,10 @@
 import { takeEvery, put } from "redux-saga/effects";
 import * as actionType from "../actions/actionTypes";
 import axios from "axios";
+import API from "../../constants/API";
 import { login_fail, login_okay } from "../actions/authActions.js";
 
-const api_path = "http://localhost:4000";
+const api_path = API.api_path;
 
 function* authSagaWatcher() {
   yield takeEvery(actionType.LOGIN_START, authSagaWorker);

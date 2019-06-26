@@ -7,7 +7,7 @@ const PostList = props => {
   useEffect(() => {
     props.getPosts();
   }, []); //when component mounted, fetch posts
-  return <h1>This is post list</h1>;
+  return props.posts.map(post => <Post key={post.fileName} data={post} />);
 };
 
 const mapStateToProps = state => {

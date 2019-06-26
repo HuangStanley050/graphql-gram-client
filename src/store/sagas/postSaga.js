@@ -1,8 +1,10 @@
 import {takeEvery, put} from "redux-saga/effects";
 import * as actionType from "../actions/actionTypes";
 import {get_posts_okay, get_posts_fail} from "../actions/postActions";
+import API from "../../constants/API";
 import axios from "axios";
-const api_path = "http://localhost:4000";
+const api_path = API.api_path;
+
 function* postSagaWatcher() {
   yield takeEvery(actionType.GET_POSTS_START, postSagaWorker);
 }
