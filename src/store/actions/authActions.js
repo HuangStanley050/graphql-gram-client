@@ -15,4 +15,15 @@ export const login_okay = userInfo => ({
   userInfo
 });
 
-export const logout = () => ({ type: actionType.LOGOUT });
+export const register_start = userInfo => ({
+  type: actionType.REGISTER_START,
+  userInfo
+});
+export const register_fail = message => ({
+  type: actionType.REGISTER_FAIL,
+  message
+});
+
+export const register_okay = () => ({type: actionType.REGISTER_OKAY});
+
+export const logout = () => ({type: actionType.LOGOUT});

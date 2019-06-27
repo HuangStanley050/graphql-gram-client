@@ -7,6 +7,11 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionType.REGISTER_OKAY:
+      return {
+        ...state,
+        isRegistered: true
+      };
     case actionType.LOGIN_START:
       return {
         ...state,
