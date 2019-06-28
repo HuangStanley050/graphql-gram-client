@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import Links from "../constants/navigationLinks";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { logout } from "../store/actions/authActions";
+import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import {logout} from "../store/actions/authActions";
 import {
   Collapse,
   Navbar,
@@ -30,7 +30,7 @@ class Header extends Component {
   render() {
     return (
       <section>
-        <Navbar color="light" light expand="md">
+        <Navbar style={{backgroundColor: "#528feb"}} expand="md">
           <NavbarBrand tag={Link} to="/">
             reactstrap
           </NavbarBrand>

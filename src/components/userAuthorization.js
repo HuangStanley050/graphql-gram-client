@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import {Button, Form, FormGroup, Label, Input, Container} from "reactstrap";
-import {connect} from "react-redux";
-import {Redirect} from "react-router-dom";
-import {login_start, register_start} from "../store/actions/authActions";
+import React, { useState } from "react";
+import { Button, Form, FormGroup, Label, Input, Container } from "reactstrap";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { login_start, register_start } from "../store/actions/authActions";
 
 const useForm = () => {
   const [form, setValue] = useState({
@@ -36,7 +36,7 @@ const UserAuth = props => {
   const submitHandler = e => {
     e.preventDefault();
     if (props.authType === "login") {
-      props.login({email: form.email, password: form.password});
+      props.login({ email: form.email, password: form.password });
       resetFields();
     } else {
       props.register({
@@ -49,7 +49,7 @@ const UserAuth = props => {
   };
 
   const RegisterBox = (
-    <section style={{width: "420px", margin: "1rem auto"}}>
+    <section style={{ width: "420px", margin: "1rem auto" }}>
       <Container>
         <Form onSubmit={submitHandler}>
           <FormGroup>
@@ -96,7 +96,7 @@ const UserAuth = props => {
               placeholder="Retype your password"
             />
           </FormGroup>
-          <Button style={{marginRight: "2rem"}} size="lg" color="primary">
+          <Button style={{ marginRight: "2rem" }} size="lg" color="primary">
             Submit
           </Button>
           <Button size="lg" color="danger">
@@ -108,7 +108,7 @@ const UserAuth = props => {
   );
 
   const LoginBox = (
-    <section style={{width: "420px", margin: "1rem auto"}}>
+    <section style={{ width: "420px", margin: "1rem auto" }}>
       <Container>
         <Form onSubmit={submitHandler}>
           <FormGroup>
@@ -133,7 +133,7 @@ const UserAuth = props => {
               placeholder="your password"
             />
           </FormGroup>
-          <Button style={{marginRight: "2rem"}} size="lg" color="primary">
+          <Button style={{ marginRight: "2rem" }} size="lg" color="primary">
             Submit
           </Button>
           <Button size="lg" color="danger">
@@ -144,9 +144,9 @@ const UserAuth = props => {
     </section>
   );
 
-  if (props.isAuth) {
-    return <Redirect to="/pictures" />;
-  }
+  // if (props.isAuth) {
+  //   return <Redirect to="/pictures" />;
+  // }
 
   return props.authType === "login" ? LoginBox : RegisterBox;
 };

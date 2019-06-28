@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col } from "reactstrap";
+import {Row, Col} from "reactstrap";
 import {
   Card,
   CardImg,
@@ -21,8 +21,8 @@ const Post = props => {
     height: "700px"
   };
   return (
-    <Row>
-      <Col xs="12" md={{ size: 8, offset: 2 }}>
+    <Row style={{marginBottom: "2rem"}}>
+      <Col xs="12" md={{size: 8, offset: 2}}>
         <Card>
           <CardImg
             id="image_post"
