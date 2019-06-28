@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import Post from "./post";
 import {get_posts_start} from "../store/actions/postActions";
 import {connect} from "react-redux";
+import {Container} from "reactstrap";
 import Loader from "./loader";
 
 const PostList = props => {
@@ -11,7 +12,11 @@ const PostList = props => {
   return props.loading ? (
     <Loader />
   ) : (
-    props.posts.map(post => <Post key={post.fileName} data={post} />)
+    <Container>
+      {props.posts.map(post => (
+        <Post key={post.fileName} data={post} />
+      ))}
+    </Container>
   );
 };
 

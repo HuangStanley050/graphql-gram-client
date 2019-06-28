@@ -9,3 +9,10 @@ main {
   display: flex;
   flex-direction: column;
 }
+@media (max-width: 600px) {
+  #image_post {
+    height: auto !important;
+    objet-fit: none !important;
+    width: 100% !important;
+  }
+}
