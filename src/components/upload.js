@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Button, Form, FormGroup, Label, Input, FormText} from "reactstrap";
+import React, { useState } from "react";
+import { Form, FormGroup, Label, Input } from "reactstrap";
 
 const Upload = props => {
   const [fileStore, setFile] = useState(null);
@@ -12,7 +12,7 @@ const Upload = props => {
     //props.upload(fileStore);
     formData.append("file", fileStore);
     //props.upload(formData);
-    console.log(formData);
+    //console.log(formData.get("file"));
     setFile(null);
   };
   const uploadStyle = {
@@ -34,21 +34,23 @@ const Upload = props => {
     <Form style={uploadStyle}>
       <FormGroup>
         <Label style={inputStyle} for="exampleFile">
-          <i style={{fontSize: "7rem"}} className="fas fa-plus-square" />
+          <i style={{ fontSize: "7rem" }} className="fas fa-plus-square" />
         </Label>
-        <Input type="file" name="file" id="exampleFile" />
+        <Input
+          onChange={fileChangeHandler}
+          type="file"
+          name="file"
+          id="exampleFile"
+        />
       </FormGroup>
       <FormGroup>
-        <Button
-          style={{
-            ...inputStyle,
-            color: "white",
-            backgroundColor: "blue",
-            borderColor: "unset"
-          }}
-        >
-          <i style={{fontSize: "7rem"}} className="fas fa-upload" />
-        </Button>
+        <Label style={{ ...inputStyle, color: "blue" }}>
+          <i
+            onClick={uploadImage}
+            style={{ fontSize: "7rem" }}
+            className="fas fa-upload"
+          />
+        </Label>
       </FormGroup>
     </Form>
   );
