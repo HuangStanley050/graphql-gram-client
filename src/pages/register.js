@@ -3,6 +3,7 @@ import Layout from "../components/layout";
 import UserAuth from "../components/userAuthorization";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
+import Upload from "../components/upload";
 
 const Register = props => {
   if (props.isRegistered) {
@@ -12,6 +13,7 @@ const Register = props => {
     <Layout>
       <h1 className="text-center mt-3">Register page</h1>
       <UserAuth authType="register" />
+      <Upload />
     </Layout>
   );
 };
