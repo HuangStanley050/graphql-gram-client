@@ -17,6 +17,7 @@ const Upload = props => {
   };
   const uploadStyle = {
     position: "fixed",
+    display: "flex",
     bottom: "60px",
     width: "200px",
     right: "80px"
@@ -33,9 +34,21 @@ const Upload = props => {
     <Form style={uploadStyle}>
       <FormGroup>
         <Label style={inputStyle} for="exampleFile">
-          <i style={{fontSize: "9rem"}} className="fas fa-plus-square" />
+          <i style={{fontSize: "7rem"}} className="fas fa-plus-square" />
         </Label>
         <Input type="file" name="file" id="exampleFile" />
+      </FormGroup>
+      <FormGroup>
+        <Button
+          style={{
+            ...inputStyle,
+            color: "white",
+            backgroundColor: "blue",
+            borderColor: "unset"
+          }}
+        >
+          <i style={{fontSize: "7rem"}} className="fas fa-upload" />
+        </Button>
       </FormGroup>
     </Form>
   );
