@@ -5,11 +5,42 @@ import API from "../../constants/API";
 import axios from "axios";
 const api_path = API.api_path;
 
-function* uploadSagaWatcher() {}
-function* uploadSagaWorker(action) {}
-
 function* postSagaWatcher() {
   yield takeEvery(actionType.GET_POSTS_START, postSagaWorker);
+  yield takeEvery(actionType.UPLOAD_START, uploadSagaWorker);
+}
+
+function* uploadSagaWorker(action) {
+  yield console.log(action.file.get("file"));
+  const token = localStorage.getItem("graphgram-token");
+  try {
+    let result = yield axios({
+      headers: {
+        Authorization: "bearer " + token
+      },
+      method: "post",
+      url: api_path,
+      data: {
+        query: `
+            query {
+              mutation Upload($file:Upload!) {
+                singleUpload(file:$file){
+                  id
+                  fileName
+                  download
+                }
+              }
+            }
+        `,
+        variables: {
+          file: action.file.get("file")
+        }
+      }
+    });
+    console.log(result.data.data);
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 function* postSagaWorker(action) {

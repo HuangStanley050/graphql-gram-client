@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { Form, FormGroup, Label, Input } from "reactstrap";
+import React, {useState} from "react";
+import {Form, FormGroup, Label, Input} from "reactstrap";
+import {connect} from "react-redux";
+import {upload_start} from "../store/actions/uploadActions";
 
 const Upload = props => {
   const [fileStore, setFile] = useState(null);
@@ -11,7 +13,7 @@ const Upload = props => {
     const formData = new FormData();
     //props.upload(fileStore);
     formData.append("file", fileStore);
-    //props.upload(formData);
+    props.upload(formData);
     //console.log(formData.get("file"));
     setFile(null);
   };
@@ -34,7 +36,7 @@ const Upload = props => {
     <Form style={uploadStyle}>
       <FormGroup>
         <Label style={inputStyle} for="exampleFile">
-          <i style={{ fontSize: "7rem" }} className="fas fa-plus-square" />
+          <i style={{fontSize: "7rem"}} className="fas fa-plus-square" />
         </Label>
         <Input
           onChange={fileChangeHandler}
@@ -44,10 +46,10 @@ const Upload = props => {
         />
       </FormGroup>
       <FormGroup>
-        <Label style={{ ...inputStyle, color: "blue" }}>
+        <Label style={{...inputStyle, color: "blue"}}>
           <i
             onClick={uploadImage}
-            style={{ fontSize: "7rem" }}
+            style={{fontSize: "7rem"}}
             className="fas fa-upload"
           />
         </Label>
@@ -55,5 +57,12 @@ const Upload = props => {
     </Form>
   );
 };
-
-export default Upload;
+const mapDispatchToProps = dispatch => {
+  return {
+    upload: file => dispatch(upload_start(file))
+  };
+};
+export default connect(
+  null,
+  mapDispatchToProps
+)(Upload);
