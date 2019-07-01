@@ -11,3 +11,7 @@ export const REGISTER_FAIL = "REGISTER_FAIL";
 export const GET_POSTS_START = "GET_POSTS_START";
 export const GET_POSTS_FAIL = "GET_POSTS_FAIL";
 export const GET_POSTS_OKAY = "GET_POSTS_OKAY";
+
+export const UPLOAD_START = "UPLOAD_START";
+export const UPLOAD_OKAY = "UPLOAD_OKAY";
+export const UPLOAD_FAIL = "UPLOAD_START";
