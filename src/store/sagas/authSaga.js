@@ -1,4 +1,4 @@
-import {takeEvery, put} from "redux-saga/effects";
+import { takeEvery, put } from "redux-saga/effects";
 import * as actionType from "../actions/actionTypes";
 import axios from "axios";
 import API from "../../constants/API";
@@ -17,7 +17,7 @@ function* authSagaWatcher() {
 }
 
 function* registerSagaWorker(action) {
-  yield console.log(action);
+  //yield console.log(action);
   try {
     let result = yield axios({
       headers: {
