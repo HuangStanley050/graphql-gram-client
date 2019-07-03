@@ -20,9 +20,7 @@ function* uploadSagaWorker(action) {
       },
       method: "post",
       url: upload_path,
-      data: {
-        stuff: "stuff I guess"
-      }
+      data: action.file
     });
     yield console.log(result.data);
   } catch (err) {

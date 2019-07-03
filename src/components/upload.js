@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Form, FormGroup, Label, Input } from "reactstrap";
-import { connect } from "react-redux";
-import { upload_start } from "../store/actions/uploadActions";
+import React, {useState} from "react";
+import {Form, FormGroup, Label, Input} from "reactstrap";
+import {connect} from "react-redux";
+import {upload_start} from "../store/actions/uploadActions";
 import fs from "fs";
 
 const Upload = props => {
@@ -12,11 +12,10 @@ const Upload = props => {
   const uploadImage = e => {
     e.preventDefault();
     const formData = new FormData();
-    //props.upload(fileStore);
-    formData.append(0, fs.createReadStream);
+
     formData.append("file", fileStore);
     props.upload(formData);
-    //console.log(formData.get("file"));
+
     setFile(null);
   };
   const uploadStyle = {
@@ -38,7 +37,7 @@ const Upload = props => {
     <Form style={uploadStyle}>
       <FormGroup>
         <Label style={inputStyle} for="exampleFile">
-          <i style={{ fontSize: "7rem" }} className="fas fa-plus-square" />
+          <i style={{fontSize: "7rem"}} className="fas fa-plus-square" />
         </Label>
         <Input
           onChange={fileChangeHandler}
@@ -48,10 +47,10 @@ const Upload = props => {
         />
       </FormGroup>
       <FormGroup>
-        <Label style={{ ...inputStyle, color: "blue" }}>
+        <Label style={{...inputStyle, color: "blue"}}>
           <i
             onClick={uploadImage}
-            style={{ fontSize: "7rem" }}
+            style={{fontSize: "7rem"}}
             className="fas fa-upload"
           />
         </Label>
