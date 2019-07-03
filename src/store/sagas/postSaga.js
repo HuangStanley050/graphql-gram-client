@@ -1,6 +1,7 @@
-import {takeEvery, put} from "redux-saga/effects";
+import { takeEvery, put } from "redux-saga/effects";
 import * as actionType from "../actions/actionTypes";
-import {get_posts_okay, get_posts_fail} from "../actions/postActions";
+import { get_posts_okay, get_posts_fail } from "../actions/postActions";
+import { upload_okay } from "../actions/uploadActions";
 import API from "../../constants/API";
 import axios from "axios";
 const api_path = API.api_path;
@@ -22,7 +23,8 @@ function* uploadSagaWorker(action) {
       url: upload_path,
       data: action.file
     });
-    yield console.log(result.data);
+    //yield console.log(result.data);
+    yield put(upload_okay(result.data));
   } catch (err) {
     console.log(err);
   }
