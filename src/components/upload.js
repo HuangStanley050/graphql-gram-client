@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import {Form, FormGroup, Label, Input} from "reactstrap";
 import {connect} from "react-redux";
 import {upload_start} from "../store/actions/uploadActions";
-import fs from "fs";
 
 const Upload = props => {
   const [fileStore, setFile] = useState(null);
