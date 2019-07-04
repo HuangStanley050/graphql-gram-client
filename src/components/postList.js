@@ -1,21 +1,29 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import Post from "./post";
 import {get_posts_start} from "../store/actions/postActions";
 import {connect} from "react-redux";
 import {Container} from "reactstrap";
+import PictureModal from "./pictureModal";
 import Loader from "./loader";
 
 const PostList = props => {
+  const [modal, setModal] = useState(false);
+  const toggle = e => {
+    setModal(!modal);
+  };
+
   useEffect(() => {
     props.getPosts();
   }, []); //when component mounted, fetch posts
+
   return props.loading ? (
     <Loader />
   ) : (
     <Container>
       {props.posts.map(post => (
-        <Post key={post.fileName} data={post} />
+        <Post modalToggle={toggle} key={post.fileName} data={post} />
       ))}
+      <PictureModal modalStatus={modal} toggle={toggle} />
     </Container>
   );
 };

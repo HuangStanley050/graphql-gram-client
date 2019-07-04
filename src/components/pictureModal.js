@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from "reactstrap";
+import React, { useState } from "react";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 const PictureModal = props => {
   const [modal, toggle] = useState(false);
@@ -9,11 +9,12 @@ const PictureModal = props => {
 
   return (
     <section>
-      <Button color="danger" onClick={toggleModal}>
-        Click
-      </Button>
-      <Modal isOpen={modal} toggle={toggleModal} className={props.className}>
-        <ModalHeader toggle={toggleModal}>Modal title</ModalHeader>
+      <Modal
+        isOpen={props.modalStatus}
+        toggle={props.toggle}
+        className={props.className}
+      >
+        <ModalHeader toggle={props.toggle}>Modal title</ModalHeader>
         <ModalBody>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -24,10 +25,10 @@ const PictureModal = props => {
           culpa qui officia deserunt mollit anim id est laborum.
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={toggleModal}>
+          <Button color="primary" onClick={props.toggle}>
             Do Something
           </Button>{" "}
-          <Button color="secondary" onClick={toggleModal}>
+          <Button color="secondary" onClick={props.toggle}>
             Cancel
           </Button>
         </ModalFooter>
