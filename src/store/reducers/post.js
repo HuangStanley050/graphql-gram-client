@@ -1,6 +1,7 @@
 import * as actionType from "../actions/actionTypes";
 const initialState = {
   posts: [],
+  currentPost: "",
   loading: false
 };
 
@@ -23,6 +24,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         posts: [...action.posts],
         loading: false
+      };
+    case actionType.CURRENT_POST:
+      return {
+        ...state,
+        currentPost: action.postId
       };
     default:
       return state;

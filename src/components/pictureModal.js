@@ -1,11 +1,21 @@
-import React, { useState } from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import React, {useState} from "react";
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  InputGroup,
+  Input
+} from "reactstrap";
 
 const PictureModal = props => {
   const [modal, toggle] = useState(false);
+  const [comment, setComment] = useState("");
   const toggleModal = e => {
     toggle(!modal);
   };
+  const inputHandler = e => setComment(e.target.value);
 
   return (
     <section>
@@ -14,19 +24,15 @@ const PictureModal = props => {
         toggle={props.toggle}
         className={props.className}
       >
-        <ModalHeader toggle={props.toggle}>Modal title</ModalHeader>
-        <ModalBody>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </ModalBody>
+        <ModalHeader toggle={props.toggle}>Add Comment</ModalHeader>
+
+        <InputGroup>
+          <Input onChange={inputHandler} value={comment} />
+        </InputGroup>
+
         <ModalFooter>
           <Button color="primary" onClick={props.toggle}>
-            Do Something
+            Submit
           </Button>{" "}
           <Button color="secondary" onClick={props.toggle}>
             Cancel

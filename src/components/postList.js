@@ -1,14 +1,17 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Post from "./post";
-import {get_posts_start} from "../store/actions/postActions";
-import {connect} from "react-redux";
-import {Container} from "reactstrap";
+import { get_posts_start } from "../store/actions/postActions";
+import { connect } from "react-redux";
+import { Container } from "reactstrap";
 import PictureModal from "./pictureModal";
+import { current_post } from "../store/actions/postActions";
 import Loader from "./loader";
 
 const PostList = props => {
   const [modal, setModal] = useState(false);
-  const toggle = e => {
+
+  const toggle = postId => {
+    //console.log(postId);
     setModal(!modal);
   };
 
@@ -20,9 +23,12 @@ const PostList = props => {
     <Loader />
   ) : (
     <Container>
-      {props.posts.map(post => (
-        <Post modalToggle={toggle} key={post.fileName} data={post} />
-      ))}
+      {props.posts.map(post => {
+        let postId = post.postId;
+        return (
+          <Post modalToggle={() => toggle(postId)} key={postId} data={post} />
+        );
+      })}
       <PictureModal modalStatus={modal} toggle={toggle} />
     </Container>
   );
@@ -37,7 +43,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getPosts: () => dispatch(get_posts_start())
+    getPosts: () => dispatch(get_posts_start()),
+    setCurrentPost: postId => dispatch(current_post(postId))
   };
 };
 

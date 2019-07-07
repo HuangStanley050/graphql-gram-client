@@ -15,3 +15,8 @@ export const GET_POSTS_OKAY = "GET_POSTS_OKAY";
 export const UPLOAD_START = "UPLOAD_START";
 export const UPLOAD_OKAY = "UPLOAD_OKAY";
 export const UPLOAD_FAIL = "UPLOAD_START";
+
+export const CURRENT_POST = "CURRENT_POST";
+export const ADD_COMMENT_START = "ADD_COMMENT_START";
+export const ADD_COMMENT_OKAY = "ADD_COMMENT_OKAY";
+export const ADD_COMMENT_FAIL = "ADD_COMMENT_FAIL";
