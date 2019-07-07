@@ -16,7 +16,9 @@ const PictureModal = props => {
   const inputHandler = e => setComment(e.target.value);
   const submitComment = e => {
     props.toggle(props.postId);
+
     props.add_comment(comment);
+    setComment("");
   };
   return (
     <section>
@@ -33,7 +35,7 @@ const PictureModal = props => {
           <Button color="primary" onClick={submitComment}>
             Submit
           </Button>{" "}
-          <Button color="secondary" onClick={props.toggle}>
+          <Button color="secondary" onClick={() => props.toggle(props.postId)}>
             Cancel
           </Button>
         </ModalFooter>
