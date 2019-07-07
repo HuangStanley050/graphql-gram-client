@@ -13,6 +13,7 @@ const PostList = props => {
   const toggle = postId => {
     //console.log(postId);
     setModal(!modal);
+    props.setCurrentPost(postId);
   };
 
   useEffect(() => {
@@ -29,7 +30,11 @@ const PostList = props => {
           <Post modalToggle={() => toggle(postId)} key={postId} data={post} />
         );
       })}
-      <PictureModal modalStatus={modal} toggle={toggle} />
+      <PictureModal
+        postId={props.currentPostId}
+        modalStatus={modal}
+        toggle={toggle}
+      />
     </Container>
   );
 };
@@ -37,7 +42,8 @@ const PostList = props => {
 const mapStateToProps = state => {
   return {
     posts: state.post.posts,
-    loading: state.post.loading
+    loading: state.post.loading,
+    currentPostId: state.post.currentPost
   };
 };
 

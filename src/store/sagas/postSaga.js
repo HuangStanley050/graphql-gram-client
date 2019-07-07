@@ -10,8 +10,11 @@ const upload_path = API.upload_path;
 function* postSagaWatcher() {
   yield takeEvery(actionType.GET_POSTS_START, postSagaWorker);
   yield takeEvery(actionType.UPLOAD_START, uploadSagaWorker);
+  yield takeEvery(actionType.ADD_COMMENT_START, commentSagaWorker);
 }
-
+function* commentSagaWorker(action) {
+  yield console.log(action);
+}
 function* uploadSagaWorker(action) {
   const token = localStorage.getItem("graphgram-token");
   try {
