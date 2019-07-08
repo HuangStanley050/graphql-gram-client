@@ -1,8 +1,11 @@
 import * as actionType from "./actionTypes";
 
-export const get_posts_start = () => ({type: actionType.GET_POSTS_START});
+export const get_posts_start = () => ({ type: actionType.GET_POSTS_START });
 
-export const current_post = postId => ({type: actionType.CURRENT_POST, postId});
+export const current_post = postId => ({
+  type: actionType.CURRENT_POST,
+  postId
+});
 
 export const add_comment_start = comment => ({
   type: actionType.ADD_COMMENT_START,
@@ -10,10 +13,11 @@ export const add_comment_start = comment => ({
 });
 
 export const add_comment_okay = confirmation => ({
-  type: actionType.ADD_COMMENT_OKAY
+  type: actionType.ADD_COMMENT_OKAY,
+  confirmation
 });
 
-export const add_comment_fail = () => ({type: actionType.ADD_COMMENT_FAIL});
+export const add_comment_fail = () => ({ type: actionType.ADD_COMMENT_FAIL });
 
 export const get_posts_okay = posts => ({
   type: actionType.GET_POSTS_OKAY,

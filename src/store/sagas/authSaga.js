@@ -1,4 +1,4 @@
-import { takeEvery, put } from "redux-saga/effects";
+import {takeEvery, put} from "redux-saga/effects";
 import * as actionType from "../actions/actionTypes";
 import axios from "axios";
 import API from "../../constants/API";
@@ -40,7 +40,7 @@ function* registerSagaWorker(action) {
         `
       }
     });
-    //console.log(result.data.data);
+
     yield put(register_okay());
   } catch (err) {
     console.log(err);

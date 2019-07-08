@@ -1,6 +1,10 @@
 import {takeEvery, put, select} from "redux-saga/effects";
 import * as actionType from "../actions/actionTypes";
-import {get_posts_okay, get_posts_fail} from "../actions/postActions";
+import {
+  get_posts_okay,
+  get_posts_fail,
+  add_comment_okay
+} from "../actions/postActions";
 import {upload_okay} from "../actions/uploadActions";
 import API from "../../constants/API";
 import axios from "axios";
@@ -15,10 +19,37 @@ function* postSagaWatcher() {
   yield takeEvery(actionType.UPLOAD_START, uploadSagaWorker);
   yield takeEvery(actionType.ADD_COMMENT_START, commentSagaWorker);
 }
+
 function* commentSagaWorker(action) {
+  const token = localStorage.getItem("graphgram-token");
   const currentPost = yield select(getCurrentPost);
   const userId = yield select(getUserId);
-  yield console.log(action.comment, currentPost, userId);
+  const comment = action.comment;
+  //yield console.log(action.comment, currentPost, userId);
+  try {
+    let result = yield axios({
+      headers: {
+        authorization: "bearer " + token
+      },
+      method: "post",
+      url: api_path,
+      data: {
+        query: `
+             mutation {
+               createComment(data:{postId:"${currentPost}",userId:"${userId}",comment:"${comment}"}) {
+               userId,
+               comment,
+               postId
+              }
+            }
+        `
+      }
+    });
+    let confirmation = result.data.data.createComment;
+    yield put(add_comment_okay(confirmation));
+  } catch (err) {
+    console.log(err);
+  }
 }
 function* uploadSagaWorker(action) {
   const token = localStorage.getItem("graphgram-token");
