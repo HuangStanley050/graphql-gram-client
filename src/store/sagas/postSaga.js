@@ -1,13 +1,14 @@
-import { takeEvery, put, select } from "redux-saga/effects";
+import {takeEvery, put, select} from "redux-saga/effects";
 import * as actionType from "../actions/actionTypes";
-import { get_posts_okay, get_posts_fail } from "../actions/postActions";
-import { upload_okay } from "../actions/uploadActions";
+import {get_posts_okay, get_posts_fail} from "../actions/postActions";
+import {upload_okay} from "../actions/uploadActions";
 import API from "../../constants/API";
 import axios from "axios";
 const api_path = API.api_path;
 const upload_path = API.upload_path;
 
 const getCurrentPost = state => state.post.currentPost;
+const getUserId = state => state.auth.userData.userId;
 
 function* postSagaWatcher() {
   yield takeEvery(actionType.GET_POSTS_START, postSagaWorker);
@@ -16,7 +17,8 @@ function* postSagaWatcher() {
 }
 function* commentSagaWorker(action) {
   const currentPost = yield select(getCurrentPost);
-  yield console.log(action.comment, currentPost);
+  const userId = yield select(getUserId);
+  yield console.log(action.comment, currentPost, userId);
 }
 function* uploadSagaWorker(action) {
   const token = localStorage.getItem("graphgram-token");
