@@ -10,7 +10,31 @@ function* commentSagaWatcher() {
 }
 
 function* fetchCommentsSagaWorker(action) {
-  yield console.log(action);
+  //yield console.log(action);
+  const token = localStorage.getItem("graphgram-token");
+  let temp_id = "5d071e9aee1bcb13631e07e7";
+  try {
+    let result = yield axios({
+      headers: {Authorization: "bearer " + token},
+      method: "post",
+      url: api_path,
+      data: {
+        query: `
+            query {
+              comments(postId:"${temp_id}") {
+                id
+                userId
+                postId
+                comment
+              }
+            }
+        `
+      }
+    });
+    console.log(result.data.data.comments);
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 export default commentSagaWatcher;
