@@ -1,7 +1,8 @@
-import {takeEvery, put} from "redux-saga/effects";
+import {takeEvery, put, select} from "redux-saga/effects";
 import * as actionType from "../actions/actionTypes";
 import {get_comments_okay, get_comments_fail} from "../actions/commentActions";
 import API from "../../constants/API";
+import {getCurrentPost} from "./getState";
 import axios from "axios";
 const api_path = API.api_path;
 
@@ -12,7 +13,8 @@ function* commentSagaWatcher() {
 function* fetchCommentsSagaWorker(action) {
   //yield console.log(action);
   const token = localStorage.getItem("graphgram-token");
-  let temp_id = "5d071e9aee1bcb13631e07e7";
+  let postId = yield select(getCurrentPost);
+
   try {
     let result = yield axios({
       headers: {Authorization: "bearer " + token},
@@ -21,7 +23,7 @@ function* fetchCommentsSagaWorker(action) {
       data: {
         query: `
             query {
-              comments(postId:"${temp_id}") {
+              comments(postId:"${postId}") {
                 id
                 userId
                 postId

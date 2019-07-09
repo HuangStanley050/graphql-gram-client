@@ -8,11 +8,12 @@ import {
 import {upload_okay} from "../actions/uploadActions";
 import API from "../../constants/API";
 import axios from "axios";
+import {getUserId, getCurrentPost} from "./getState";
 const api_path = API.api_path;
 const upload_path = API.upload_path;
 
-const getCurrentPost = state => state.post.currentPost;
-const getUserId = state => state.auth.userData.userId;
+// const getCurrentPost = state => state.post.currentPost;
+// const getUserId = state => state.auth.userData.userId;
 
 function* postSagaWatcher() {
   yield takeEvery(actionType.GET_POSTS_START, postSagaWorker);

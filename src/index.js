@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router } from "react-router-dom";
+import {BrowserRouter as Router} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
-import { createStore, applyMiddleware, compose, combineReducers } from "redux";
+import {createStore, applyMiddleware, compose, combineReducers} from "redux";
 import createSagaMiddleware from "redux-saga";
-import { Provider } from "react-redux";
+import {Provider} from "react-redux";
 import authReducer from "./store/reducers/auth";
 import postReducer from "./store/reducers/post";
 import rootSaga from "./store/sagas/";
@@ -26,6 +26,26 @@ const store = createStore(
   rootReducer,
   composeEnhancers(applyMiddleware(sagaMiddleware))
 );
+
+function select(state) {
+  return state.post.currentPost;
+}
+
+let currentValue;
+function handleChange() {
+  let previousValue = currentValue;
+  currentValue = select(store.getState());
+
+  if (previousValue !== currentValue) {
+    console.log(
+      "Some deep nested property changed from",
+      previousValue,
+      "to",
+      currentValue
+    );
+  }
+}
+store.subscribe(handleChange);
 
 sagaMiddleware.run(rootSaga);
 
