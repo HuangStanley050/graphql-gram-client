@@ -11,11 +11,6 @@ import {
   Button
 } from "reactstrap";
 
-/*
-<h1>{props.data.fileName}</h1>
-<img style={{width: "50%"}} alt="picture" src={props.data.download} />
-
- */
 const Post = props => {
   const imageStyle = {
     objectFit: "cover",

@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { Container } from "reactstrap";
 import PictureModal from "./pictureModal";
 import { current_post } from "../store/actions/postActions";
+import { get_comments_start } from "../store/actions/commentActions";
 import Loader from "./loader";
 
 const PostList = props => {
@@ -14,6 +15,7 @@ const PostList = props => {
     //console.log(postId);
     setModal(!modal);
     props.setCurrentPost(postId);
+    props.getComments();
   };
 
   useEffect(() => {
@@ -50,7 +52,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getPosts: () => dispatch(get_posts_start()),
-    setCurrentPost: postId => dispatch(current_post(postId))
+    setCurrentPost: postId => dispatch(current_post(postId)),
+    getComments: () => dispatch(get_comments_start())
   };
 };
 
