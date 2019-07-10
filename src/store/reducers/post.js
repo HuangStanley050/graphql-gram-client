@@ -9,16 +9,16 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionType.POST_NO_CHANGE:
-      return {
-        ...state,
-        postChanged: false
-      };
-    case actionType.POST_CHANGED:
-      return {
-        ...state,
-        postChanged: true
-      };
+    // case actionType.POST_NO_CHANGE:
+    //   return {
+    //     ...state,
+    //     postChanged: false
+    //   };
+    // case actionType.POST_CHANGED:
+    //   return {
+    //     ...state,
+    //     postChanged: true
+    //   };
     case actionType.GET_POSTS_START:
     case actionType.UPLOAD_START:
       return {

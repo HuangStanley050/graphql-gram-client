@@ -1,8 +1,11 @@
-import {takeEvery, put, select} from "redux-saga/effects";
+import { takeEvery, put, select } from "redux-saga/effects";
 import * as actionType from "../actions/actionTypes";
-import {get_comments_okay, get_comments_fail} from "../actions/commentActions";
+import {
+  get_comments_okay,
+  get_comments_fail
+} from "../actions/commentActions";
 import API from "../../constants/API";
-import {getCurrentPost} from "./getState";
+import { getCurrentPost } from "./getState";
 import axios from "axios";
 const api_path = API.api_path;
 
@@ -17,7 +20,7 @@ function* fetchCommentsSagaWorker(action) {
 
   try {
     let result = yield axios({
-      headers: {Authorization: "bearer " + token},
+      headers: { Authorization: "bearer " + token },
       method: "post",
       url: api_path,
       data: {

@@ -1,6 +1,7 @@
-import React, {useState} from "react";
-import {connect} from "react-redux";
-import {add_comment_start} from "../store/actions/postActions";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { add_comment_start } from "../store/actions/postActions";
+
 import {
   Button,
   Modal,
