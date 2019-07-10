@@ -14,6 +14,7 @@ const PostList = props => {
   const toggle = postId => {
     setModal(!modal);
     props.setCurrentPost(postId);
+
     props.getComments();
   };
 
@@ -44,7 +45,9 @@ const mapStateToProps = state => {
   return {
     posts: state.post.posts,
     loading: state.post.loading,
-    currentPostId: state.post.currentPost
+    currentPostId: state.post.currentPost,
+    postChanged: state.post.postChanged,
+    comments: state.post.comments
   };
 };
 

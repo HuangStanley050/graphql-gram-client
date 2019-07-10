@@ -36,7 +36,8 @@ function* fetchCommentsSagaWorker(action) {
         `
       }
     });
-    console.log(result.data.data.comments);
+    //console.log(result.data.data.comments);
+    yield put(get_comments_okay(result.data.data.comments));
   } catch (e) {
     console.log(e);
   }

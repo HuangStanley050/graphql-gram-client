@@ -40,6 +40,11 @@ const reducer = (state = initialState, action) => {
         loading: false,
         posts: [...state.posts, action.fileInfo]
       };
+    case actionType.FETCH_COMMENTS_OKAY:
+      return {
+        ...state,
+        comments: [...action.comments]
+      };
     case actionType.GET_POSTS_OKAY:
       return {
         ...state,

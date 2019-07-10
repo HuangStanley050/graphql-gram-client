@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {BrowserRouter as Router} from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
-import {createStore, applyMiddleware, compose, combineReducers} from "redux";
+import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import createSagaMiddleware from "redux-saga";
-import {Provider} from "react-redux";
+import { Provider } from "react-redux";
 import authReducer from "./store/reducers/auth";
 import postReducer from "./store/reducers/post";
 import rootSaga from "./store/sagas/";
@@ -22,27 +22,27 @@ const rootReducer = combineReducers({
   post: postReducer
 });
 
-let currentPost = "";
-const customMiddleWare = store => next => action => {
-  if (action.type === "FETCH_COMMENTS_START") {
-    let previousPost = currentPost;
-    let temp = store.getState();
-    currentPost = temp.post.currentPost;
-    console.log("this is previous post: ", previousPost);
-    if (previousPost !== currentPost) {
-      console.log("Post has changed");
-      console.log("this is current post!!: ", currentPost);
-      store.dispatch({type: "POST_CHANGED"});
-    } else {
-      store.dispatch({type: "POST_NO_CHANGE"});
-    }
-  }
-  next(action);
-};
+// let currentPost = "";
+// const customMiddleWare = store => next => action => {
+//   if (action.type === "FETCH_COMMENTS_START") {
+//     let previousPost = currentPost;
+//     let temp = store.getState();
+//     currentPost = temp.post.currentPost;
+//     console.log("this is previous post: ", previousPost);
+//     if (previousPost !== currentPost) {
+//       console.log("Post has changed");
+//       console.log("this is current post!!: ", currentPost);
+//       store.dispatch({type: "POST_CHANGED"});
+//     } else {
+//       store.dispatch({type: "POST_NO_CHANGE"});
+//     }
+//   }
+//   next(action);
+// };
 
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(customMiddleWare, sagaMiddleware))
+  composeEnhancers(applyMiddleware(sagaMiddleware))
 );
 
 // function select(state) {
