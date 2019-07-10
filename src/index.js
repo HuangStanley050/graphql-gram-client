@@ -31,18 +31,21 @@ function select(state) {
   return state.post.currentPost;
 }
 
-let currentValue;
+let currentValue = "";
 function handleChange() {
   let previousValue = currentValue;
   currentValue = select(store.getState());
 
   if (previousValue !== currentValue) {
+    store.dispatch({type: "POST_CHANGED"});
     console.log(
       "Some deep nested property changed from",
       previousValue,
       "to",
       currentValue
     );
+  } else {
+    console.log("post hasn't been changed");
   }
 }
 store.subscribe(handleChange);
