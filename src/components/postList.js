@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import Post from "./post";
-import { get_posts_start } from "../store/actions/postActions";
-import { connect } from "react-redux";
-import { Container } from "reactstrap";
+import {get_posts_start} from "../store/actions/postActions";
+import {connect} from "react-redux";
+import {Container} from "reactstrap";
 import PictureModal from "./pictureModal";
-import { current_post } from "../store/actions/postActions";
-import { get_comments_start } from "../store/actions/commentActions";
+import {current_post} from "../store/actions/postActions";
+import {get_comments_start} from "../store/actions/commentActions";
 import Loader from "./loader";
 
 const PostList = props => {
