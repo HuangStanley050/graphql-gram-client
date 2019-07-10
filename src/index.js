@@ -32,6 +32,9 @@ const customMiddleWare = store => next => action => {
     if (previousPost !== currentPost) {
       console.log("Post has changed");
       console.log("this is current post!!: ", currentPost);
+      store.dispatch({type: "POST_CHANGED"});
+    } else {
+      store.dispatch({type: "POST_NO_CHANGE"});
     }
   }
   next(action);
