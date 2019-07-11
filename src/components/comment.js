@@ -1,11 +1,11 @@
 import React from "react";
-import {Card, CardBody, CardTitle, CardText} from "reactstrap";
+import { Card, CardBody, CardTitle, CardText } from "reactstrap";
 
 const Comment = props => {
   return (
     <Card>
       <CardBody>
-        <CardTitle>{props.user} said:</CardTitle>
+        <CardTitle>{props.name} said:</CardTitle>
         <CardText>{props.comment}</CardText>
       </CardBody>
     </Card>

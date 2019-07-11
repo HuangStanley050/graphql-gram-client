@@ -32,7 +32,8 @@ const reducer = (state = initialState, action) => {
     case actionType.ADD_COMMENT_OKAY:
       const comment = {
         userId: action.confirmation.userId,
-        comment: action.confirmation.comment
+        comment: action.confirmation.comment,
+        userName: action.confirmation.userName
       };
       return {
         ...state,

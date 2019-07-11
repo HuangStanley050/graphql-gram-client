@@ -31,7 +31,8 @@ const reducer = (state = initialState, action) => {
         userData: {
           ...state.userInfo,
           userId: decoded.userId,
-          email: decoded.email
+          email: decoded.email,
+          name: decoded.name
         },
         isAuth: true
       };

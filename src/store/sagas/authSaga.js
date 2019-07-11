@@ -1,4 +1,4 @@
-import {takeEvery, put} from "redux-saga/effects";
+import { takeEvery, put } from "redux-saga/effects";
 import * as actionType from "../actions/actionTypes";
 import axios from "axios";
 import API from "../../constants/API";
@@ -28,9 +28,7 @@ function* registerSagaWorker(action) {
       data: {
         query: `
              mutation {
-               createUser(data:{email:"${action.userInfo.email}",password:"${
-          action.userInfo.password
-        }",name:"${action.userInfo.name}"}) {
+               createUser(data:{email:"${action.userInfo.email}",password:"${action.userInfo.password}",name:"${action.userInfo.name}"}) {
                  id
                  name
                  email
@@ -58,12 +56,10 @@ function* authSagaWorker(action) {
       data: {
         query: `
             mutation {
-            login(data:{email:"${action.userInfo.email}",password:"${
-          action.userInfo.password
-        }"}) {
+            login(data:{email:"${action.userInfo.email}",password:"${action.userInfo.password}"}) {
               userId,
-              token,
-              tokenExpiration
+              token
+
             }
           }
         `

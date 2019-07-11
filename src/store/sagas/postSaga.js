@@ -12,9 +12,6 @@ import {getUserId, getCurrentPost} from "./getState";
 const api_path = API.api_path;
 const upload_path = API.upload_path;
 
-// const getCurrentPost = state => state.post.currentPost;
-// const getUserId = state => state.auth.userData.userId;
-
 function* postSagaWatcher() {
   yield takeEvery(actionType.GET_POSTS_START, postSagaWorker);
   yield takeEvery(actionType.UPLOAD_START, uploadSagaWorker);
@@ -25,6 +22,7 @@ function* commentSagaWorker(action) {
   const token = localStorage.getItem("graphgram-token");
   const currentPost = yield select(getCurrentPost);
   const userId = yield select(getUserId);
+  //const name = yield select(getUserName);
   const comment = action.comment;
   //yield console.log(action.comment, currentPost, userId);
   try {
@@ -40,7 +38,8 @@ function* commentSagaWorker(action) {
                createComment(data:{postId:"${currentPost}",userId:"${userId}",comment:"${comment}"}) {
                userId,
                comment,
-               postId
+               postId,
+               userName
               }
             }
         `

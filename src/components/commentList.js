@@ -24,6 +24,7 @@ const CommentList = props => {
               key={comment.id}
               comment={comment.comment}
               user={comment.userId}
+              name={comment.userName}
             />
           );
         })}
