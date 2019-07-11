@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Collapse, Button, CardBody, Card} from "reactstrap";
 import {connect} from "react-redux";
-
+import Comment from "./comment";
 const CommentList = props => {
   const [collapsed, setCollapsed] = useState(false);
   const showContent = e => {
@@ -14,19 +14,34 @@ const CommentList = props => {
         onClick={showContent}
         style={{marginBottom: "1rem"}}
       >
-        Toggle
+        Show Comments{" "}
+        <span style={{color: "red"}}>{props.comments.length}</span>
       </Button>
       <Collapse isOpen={collapsed}>
-        <Card>
-          <CardBody>
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-            terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
-            labore wes anderson cred nesciunt sapiente ea proident.
-          </CardBody>
-        </Card>
+        {props.comments.map(comment => {
+          return (
+            <Comment
+              key={comment.id}
+              comment={comment.comment}
+              user={comment.userId}
+            />
+          );
+        })}
       </Collapse>
     </section>
   );
 };
+const mapStateToProps = state => {
+  return {
+    comments: state.post.comments
+  };
+};
+export default connect(mapStateToProps)(CommentList);
 
-export default CommentList;
+// <Card>
+//   <CardBody>
+//     Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+//     terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
+//     labore wes anderson cred nesciunt sapiente ea proident.
+//   </CardBody>
+// </Card>

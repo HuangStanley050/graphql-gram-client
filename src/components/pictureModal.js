@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from "react";
-import {connect} from "react-redux";
-import {add_comment_start} from "../store/actions/postActions";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { add_comment_start } from "../store/actions/postActions";
 import CommentList from "./commentList";
 import {
   Button,
@@ -29,7 +29,11 @@ const PictureModal = props => {
         className={props.className}
       >
         <InputGroup>
-          <Input onChange={inputHandler} value={comment} />
+          <Input
+            onChange={inputHandler}
+            value={comment}
+            placeholder="add a comment..."
+          />
         </InputGroup>
         <CommentList />
         <ModalFooter>
