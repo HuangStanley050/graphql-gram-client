@@ -9,6 +9,10 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionType.FETCH_COMMENTS_STOP:
+      return {
+        ...state
+      };
     case actionType.POST_NO_CHANGE:
       return {
         ...state,

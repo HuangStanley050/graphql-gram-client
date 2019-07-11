@@ -41,7 +41,7 @@ function* fetchCommentsSagaWorker(action) {
     } catch (e) {
       console.log(e);
     }
-  } else return;
+  } else yield put({type: "FETCH_COMMENTS_STOP"});
 }
 
 export default commentSagaWatcher;

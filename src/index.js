@@ -9,64 +9,6 @@ import store from "./storeSetup";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-// const composeEnhancers =
-//   process.env.NODE_ENV === "development"
-//     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-//     : null || compose;
-// const sagaMiddleware = createSagaMiddleware();
-// const rootReducer = combineReducers({
-//   auth: authReducer,
-//   post: postReducer
-// });
-
-// let currentPost = "";
-// const customMiddleWare = store => next => action => {
-//   if (action.type === "FETCH_COMMENTS_START") {
-//     let previousPost = currentPost;
-//     let temp = store.getState();
-//     currentPost = temp.post.currentPost;
-//     console.log("this is previous post: ", previousPost);
-//     if (previousPost !== currentPost) {
-//       console.log("Post has changed");
-//       console.log("this is current post!!: ", currentPost);
-//       store.dispatch({type: "POST_CHANGED"});
-//     } else {
-//       store.dispatch({type: "POST_NO_CHANGE"});
-//     }
-//   }
-//   next(action);
-// };
-
-// const store = createStore(
-//   rootReducer,
-//   composeEnhancers(applyMiddleware(sagaMiddleware))
-// );
-
-// function select(state) {
-//   return state.post.currentPost;
-// }
-//
-// let currentValue = "";
-// function handleChange() {
-//   let previousValue = currentValue;
-//   currentValue = select(store.getState());
-//
-//   if (previousValue !== currentValue) {
-//     store.dispatch({type: "POST_CHANGED"});
-//     console.log(
-//       "Some deep nested property changed from",
-//       previousValue,
-//       "to",
-//       currentValue
-//     );
-//   } else {
-//     console.log("post hasn't been changed");
-//   }
-// }
-// store.subscribe(handleChange);
-
-// sagaMiddleware.run(rootSaga);
-
 const app = (
   <Provider store={store}>
     <Router>

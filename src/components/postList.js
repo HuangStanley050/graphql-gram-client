@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import Post from "./post";
-import { get_posts_start } from "../store/actions/postActions";
-import { connect } from "react-redux";
-import { Container } from "reactstrap";
+import {get_posts_start} from "../store/actions/postActions";
+import {connect} from "react-redux";
+import {Container} from "reactstrap";
 import PictureModal from "./pictureModal";
-import { current_post } from "../store/actions/postActions";
-import { get_comments_start } from "../store/actions/commentActions";
+import {current_post} from "../store/actions/postActions";
+import {get_comments_start} from "../store/actions/commentActions";
 import store from "../storeSetup";
 import Loader from "./loader";
 
 let currentValue = "";
-let postChanged = false;
 
 const select = state => {
   return state.post.currentPost;
@@ -21,13 +20,7 @@ const handleChange = () => {
   currentValue = select(store.getState());
 
   if (previousValue !== currentValue) {
-    console.log(
-      "Some deep nested property changed from",
-      previousValue,
-      "to",
-      currentValue
-    );
-    store.dispatch({ type: "POST_CHANGED" });
+    store.dispatch({type: "POST_CHANGED"});
   }
 };
 const PostList = props => {
