@@ -1,15 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { add_comment_start } from "../store/actions/postActions";
+import React, {useState} from "react";
+import {connect} from "react-redux";
+import {add_comment_start} from "../store/actions/postActions";
 import CommentList from "./commentList";
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalFooter,
-  InputGroup,
-  Input
-} from "reactstrap";
+import {Button, Modal, ModalFooter, InputGroup, Input} from "reactstrap";
 
 const PictureModal = props => {
   const [comment, setComment] = useState("");

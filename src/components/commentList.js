@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {Collapse, Button, CardBody, Card} from "reactstrap";
-import {connect} from "react-redux";
+import React, { useState } from "react";
+import { Collapse, Button } from "reactstrap";
+import { connect } from "react-redux";
 import Comment from "./comment";
 const CommentList = props => {
   const [collapsed, setCollapsed] = useState(false);
@@ -12,10 +12,10 @@ const CommentList = props => {
       <Button
         color="primary"
         onClick={showContent}
-        style={{marginBottom: "1rem"}}
+        style={{ marginBottom: "1rem" }}
       >
         Show Comments{" "}
-        <span style={{color: "red"}}>{props.comments.length}</span>
+        <span style={{ color: "red" }}>{props.comments.length}</span>
       </Button>
       <Collapse isOpen={collapsed}>
         {props.comments.map(comment => {
