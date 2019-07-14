@@ -9,6 +9,14 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionType.DELETE_COMMENT_OKAY:
+      const new_comments = state.comments.filter(
+        comment => comment.commentId !== action.commentId
+      );
+      return {
+        ...state,
+        comments: [...new_comments]
+      };
     case actionType.FETCH_COMMENTS_STOP:
       return {
         ...state
@@ -33,7 +41,8 @@ const reducer = (state = initialState, action) => {
       const comment = {
         userId: action.confirmation.userId,
         comment: action.confirmation.comment,
-        userName: action.confirmation.userName
+        userName: action.confirmation.userName,
+        commentId: action.confirmation.id
       };
       return {
         ...state,

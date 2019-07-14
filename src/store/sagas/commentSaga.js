@@ -18,6 +18,31 @@ function* commentSagaWatcher() {
 
 function* deleteCommentSagaWorker(action) {
   yield console.log(action);
+  const token = localStorage.getItem("graphgram-token");
+  const commentId = action.commentId;
+  try {
+    let result = yield axios({
+      headers: { Authorization: "bearer " + token },
+      method: "post",
+      url: api_path,
+      data: {
+        query: `
+          mutation {
+            deleteComment(data:{commentId:"${commentId}"}){
+              id
+              comment
+              postId
+            }
+          }
+
+        `
+      }
+    });
+    //console.log(result.data.deleteComment.id);
+    yield put(delete_comment_okay(commentId));
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 function* fetchCommentsSagaWorker(action) {

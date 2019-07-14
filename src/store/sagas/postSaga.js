@@ -1,14 +1,14 @@
-import {takeEvery, put, select} from "redux-saga/effects";
+import { takeEvery, put, select } from "redux-saga/effects";
 import * as actionType from "../actions/actionTypes";
 import {
   get_posts_okay,
   get_posts_fail,
   add_comment_okay
 } from "../actions/postActions";
-import {upload_okay} from "../actions/uploadActions";
+import { upload_okay } from "../actions/uploadActions";
 import API from "../../constants/API";
 import axios from "axios";
-import {getUserId, getCurrentPost} from "./getState";
+import { getUserId, getCurrentPost } from "./getState";
 const api_path = API.api_path;
 const upload_path = API.upload_path;
 
@@ -40,6 +40,7 @@ function* commentSagaWorker(action) {
                comment,
                postId,
                userName
+               id
               }
             }
         `

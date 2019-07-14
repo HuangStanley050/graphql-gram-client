@@ -16,6 +16,7 @@ export const delete_comment_start = commentId => ({
 export const delete_comment_fail = () => ({
   type: actionType.DELETE_COMMENT_FAIL
 });
-export const delete_comment_okay = () => ({
-  type: actionType.DELETE_COMMENT_OKAY
+export const delete_comment_okay = commentId => ({
+  type: actionType.DELETE_COMMENT_OKAY,
+  commentId
 });
