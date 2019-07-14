@@ -2,7 +2,9 @@ import { takeEvery, put, select } from "redux-saga/effects";
 import * as actionType from "../actions/actionTypes";
 import {
   get_comments_okay,
-  get_comments_fail
+  get_comments_fail,
+  delete_comment_okay,
+  delete_comment_fail
 } from "../actions/commentActions";
 import API from "../../constants/API";
 import { getCurrentPost, getPostStatus } from "./getState";
@@ -11,6 +13,11 @@ const api_path = API.api_path;
 
 function* commentSagaWatcher() {
   yield takeEvery(actionType.FETCH_COMMENTS_START, fetchCommentsSagaWorker);
+  yield takeEvery(actionType.DELETE_COMMENT_START, deleteCommentSagaWorker);
+}
+
+function* deleteCommentSagaWorker(action) {
+  yield console.log(action);
 }
 
 function* fetchCommentsSagaWorker(action) {
@@ -44,6 +51,7 @@ function* fetchCommentsSagaWorker(action) {
       yield put({ type: "POST_NO_CHANGE" });
     } catch (e) {
       console.log(e);
+      yield put(get_comments_fail());
     }
   } else yield put({ type: "FETCH_COMMENTS_STOP" });
 }
