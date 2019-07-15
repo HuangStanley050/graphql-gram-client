@@ -3,6 +3,7 @@ import Links from "../constants/navigationLinks";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {logout} from "../store/actions/authActions";
+
 import {
   Collapse,
   Navbar,
@@ -32,7 +33,7 @@ class Header extends Component {
       <section>
         <Navbar style={{backgroundColor: "#528feb"}} expand="md">
           <NavbarBrand tag={Link} to="/">
-            reactstrap
+            GraphQLGram
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
@@ -40,7 +41,7 @@ class Header extends Component {
               {Links.map(link => {
                 let loginLink;
                 let logoutLink;
-                if (link.text === "Login" || link.text === "Register") {
+                if (!link.login) {
                   logoutLink = (
                     <NavItem key={link.text}>
                       <NavLink tag={Link} to={link.path}>
@@ -48,7 +49,9 @@ class Header extends Component {
                       </NavLink>
                     </NavItem>
                   );
-                } else {
+                }
+
+                if (link.login && link.text === "Log Out") {
                   loginLink = (
                     <NavItem key={link.text}>
                       <NavLink
@@ -56,6 +59,15 @@ class Header extends Component {
                         tag={Link}
                         to={link.path}
                       >
+                        {link.text}
+                      </NavLink>
+                    </NavItem>
+                  );
+                }
+                if (link.login) {
+                  loginLink = (
+                    <NavItem key={link.text}>
+                      <NavLink tag={Link} to={link.path}>
                         {link.text}
                       </NavLink>
                     </NavItem>

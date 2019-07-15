@@ -9,6 +9,10 @@ const PictureModal = props => {
 
   const inputHandler = e => setComment(e.target.value);
   const submitComment = e => {
+    if (comment === "") {
+      alert("Unable to add empty comment");
+      return;
+    }
     props.toggle(props.postId);
 
     props.add_comment(comment);
