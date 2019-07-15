@@ -1,7 +1,14 @@
 import React from "react";
-import {Row, Col} from "reactstrap";
+import { Row, Col } from "reactstrap";
 
-import {Card, CardImg, CardText, CardBody, CardTitle, Button} from "reactstrap";
+import {
+  Card,
+  CardImg,
+  CardText,
+  CardBody,
+  CardTitle,
+  Button
+} from "reactstrap";
 
 const Post = props => {
   const imageStyle = {
@@ -9,8 +16,8 @@ const Post = props => {
     height: "700px"
   };
   return (
-    <Row style={{marginBottom: "2rem"}}>
-      <Col xs="12" md={{size: 8, offset: 2}}>
+    <Row style={{ marginBottom: "2rem" }}>
+      <Col xs="12" md={{ size: 8, offset: 2 }}>
         <Card>
           <CardImg
             id="image_post"
@@ -27,7 +34,7 @@ const Post = props => {
               Some quick example text to build on the card title and make up the
               bulk of the card's content.
             </CardText>
-            <Button onClick={props.modalToggle}>Add Comment</Button>
+            <Button onClick={props.modalToggle}>Add/View Comment</Button>
           </CardBody>
         </Card>
       </Col>

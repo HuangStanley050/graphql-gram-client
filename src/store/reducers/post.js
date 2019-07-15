@@ -4,18 +4,26 @@ const initialState = {
   currentPost: "",
   comments: [],
   postChanged: false,
-  loading: false
+  loading: false,
+  commentLoading: false
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionType.DELETE_COMMENT_START:
+      return {
+        ...state,
+        commentLoading: true
+      };
+
     case actionType.DELETE_COMMENT_OKAY:
       const new_comments = state.comments.filter(
-        comment => comment.commentId !== action.commentId
+        comment => comment.id !== action.commentId
       );
       return {
         ...state,
-        comments: [...new_comments]
+        comments: [...new_comments],
+        commentLoading: false
       };
     case actionType.FETCH_COMMENTS_STOP:
       return {
@@ -44,6 +52,7 @@ const reducer = (state = initialState, action) => {
         userName: action.confirmation.userName,
         commentId: action.confirmation.id
       };
+      console.log(comment);
       return {
         ...state,
         comments: [...state.comments, comment]

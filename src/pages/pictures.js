@@ -6,7 +6,6 @@ import Upload from "../components/upload";
 const Pictures = props => {
   return (
     <Layout>
-      <h1>Protected</h1>
       <PostList />
       <Upload />
     </Layout>

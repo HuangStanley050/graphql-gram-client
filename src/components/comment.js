@@ -5,6 +5,7 @@ import {delete_comment_start} from "../store/actions/commentActions";
 
 const Comment = props => {
   const handleDelete = () => props.deleteComment(props.commentId);
+  console.log(props.commentId);
   return (
     <Card>
       <CardBody>
