@@ -1,8 +1,17 @@
 import React from "react";
-import { Spinner } from "reactstrap";
+import {Spinner} from "reactstrap";
 
 const CommentLoader = props => {
-  return <Spinner size="sm" color="primary" />;
+  const loaderStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  };
+  return (
+    <div style={loaderStyle}>
+      <Spinner size="sm" color="primary" />
+    </div>
+  );
 };
 
 export default CommentLoader;

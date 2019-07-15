@@ -1,11 +1,11 @@
 import React from "react";
-import { Card, CardBody, CardTitle, CardText } from "reactstrap";
-import { connect } from "react-redux";
-import { delete_comment_start } from "../store/actions/commentActions";
+import {Card, CardBody, CardTitle, CardText} from "reactstrap";
+import {connect} from "react-redux";
+import {delete_comment_start} from "../store/actions/commentActions";
 
 const Comment = props => {
   const handleDelete = () => props.deleteComment(props.commentId);
-  console.log(props);
+  //console.log(props);
   return (
     <Card>
       <CardBody>
