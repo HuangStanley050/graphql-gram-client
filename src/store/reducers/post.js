@@ -50,7 +50,7 @@ const reducer = (state = initialState, action) => {
         userId: action.confirmation.userId,
         comment: action.confirmation.comment,
         userName: action.confirmation.userName,
-        commentId: action.confirmation.id
+        id: action.confirmation.id
       };
       console.log(comment);
       return {
