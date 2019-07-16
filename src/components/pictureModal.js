@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import {connect} from "react-redux";
-import {add_comment_start} from "../store/actions/postActions";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { add_comment_start } from "../store/actions/postActions";
 import CommentList from "./commentList";
-import {Button, Modal, ModalFooter, InputGroup, Input} from "reactstrap";
+import { Button, Modal, ModalFooter, InputGroup, Input } from "reactstrap";
 
 const PictureModal = props => {
   const [comment, setComment] = useState("");
@@ -13,7 +13,7 @@ const PictureModal = props => {
       alert("Unable to add empty comment");
       return;
     }
-    props.toggle(props.postId);
+    //props.toggle(props.postId);
 
     props.add_comment(comment);
     setComment("");

@@ -10,6 +10,11 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionType.ADD_COMMENT_START:
+      return {
+        ...state,
+        commentLoading: true
+      };
     case actionType.DELETE_COMMENT_START:
       return {
         ...state,
@@ -55,7 +60,8 @@ const reducer = (state = initialState, action) => {
       console.log(comment);
       return {
         ...state,
-        comments: [...state.comments, comment]
+        comments: [...state.comments, comment],
+        commentLoading: false
       };
     case actionType.UPLOAD_OKAY:
       return {

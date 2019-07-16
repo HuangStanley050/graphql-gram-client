@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 //import Links from "../constants/navigationLinks";
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {logout} from "../store/actions/authActions";
 
@@ -25,9 +25,8 @@ class Header extends Component {
   logoutHandler = () => {
     if (window.confirm("Are you logging out?")) {
       this.props.logout();
-      this.props.history.push(`/logout`);
+      this.props.history.push("/logout");
     }
-    return;
   };
 
   render() {
@@ -59,6 +58,7 @@ class Header extends Component {
         </NavItem>
       </>
     );
+
     return (
       <section>
         <Navbar style={{backgroundColor: "#528feb"}} expand="md">
@@ -88,7 +88,9 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Header);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Header)
+);
