@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import Links from "../constants/navigationLinks";
+//import Links from "../constants/navigationLinks";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {logout} from "../store/actions/authActions";
@@ -25,10 +25,40 @@ class Header extends Component {
   logoutHandler = () => {
     if (window.confirm("Are you logging out?")) {
       this.props.logout();
+      this.props.history.push(`/logout`);
     }
+    return;
   };
 
   render() {
+    const LogoutLinks = () => (
+      <>
+        <NavItem>
+          <NavLink to="/login" tag={Link}>
+            Login
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink to="/register" tag={Link}>
+            Register
+          </NavLink>
+        </NavItem>
+      </>
+    );
+    const LoginLinks = () => (
+      <>
+        <NavItem>
+          <NavLink to="/personal" tag={Link}>
+            Personal
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink onClick={this.logoutHandler} tag={Link}>
+            Logout
+          </NavLink>
+        </NavItem>
+      </>
+    );
     return (
       <section>
         <Navbar style={{backgroundColor: "#528feb"}} expand="md">
@@ -38,47 +68,7 @@ class Header extends Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              {Links.map(link => {
-                let loginLink;
-                let logoutLink;
-                if (!link.login) {
-                  logoutLink = (
-                    <NavItem key={link.text}>
-                      <NavLink tag={Link} to={link.path}>
-                        {link.text}
-                      </NavLink>
-                    </NavItem>
-                  );
-                }
-
-                if (link.login && link.text === "Log Out") {
-                  loginLink = (
-                    <NavItem key={link.text}>
-                      <NavLink
-                        onClick={this.logoutHandler}
-                        tag={Link}
-                        to={link.path}
-                      >
-                        {link.text}
-                      </NavLink>
-                    </NavItem>
-                  );
-                }
-                if (link.login) {
-                  loginLink = (
-                    <NavItem key={link.text}>
-                      <NavLink tag={Link} to={link.path}>
-                        {link.text}
-                      </NavLink>
-                    </NavItem>
-                  );
-                }
-                if (this.props.isAuth) {
-                  return loginLink;
-                } else {
-                  return logoutLink;
-                }
-              })}
+              {this.props.isAuth ? <LoginLinks /> : <LogoutLinks />}
             </Nav>
           </Collapse>
         </Navbar>
