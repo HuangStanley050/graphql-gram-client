@@ -1,8 +1,8 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 //import Links from "../constants/navigationLinks";
-import {Link, withRouter} from "react-router-dom";
-import {connect} from "react-redux";
-import {logout} from "../store/actions/authActions";
+import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { logout, clear_data } from "../store/actions/authActions";
 
 import {
   Collapse,
@@ -25,6 +25,7 @@ class Header extends Component {
   logoutHandler = () => {
     if (window.confirm("Are you logging out?")) {
       this.props.logout();
+      this.props.clear();
       this.props.history.push("/logout");
     }
   };
@@ -61,7 +62,7 @@ class Header extends Component {
 
     return (
       <section>
-        <Navbar style={{backgroundColor: "#528feb"}} expand="md">
+        <Navbar style={{ backgroundColor: "#528feb" }} expand="md">
           <NavbarBrand tag={Link} to="/">
             GraphQLGram
           </NavbarBrand>
@@ -84,7 +85,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    logout: () => dispatch(logout())
+    logout: () => dispatch(logout()),
+    clear: () => dispatch(clear_data())
   };
 };
 

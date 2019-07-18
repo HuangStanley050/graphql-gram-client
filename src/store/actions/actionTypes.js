@@ -3,6 +3,7 @@ export const LOGIN_OKAY = "LOGIN_OKAY";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 
 export const LOGOUT = "LOGOUT";
+export const CLEAR_DATA = "CLEAR_DATA";
 
 export const REGISTER_START = "REGISTER_START";
 export const REGISTER_OKAY = "REGISTER_OKAY";

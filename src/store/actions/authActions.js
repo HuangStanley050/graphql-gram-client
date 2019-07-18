@@ -27,3 +27,4 @@ export const register_fail = message => ({
 export const register_okay = () => ({type: actionType.REGISTER_OKAY});
 
 export const logout = () => ({type: actionType.LOGOUT});
+export const clear_data = () => ({type: actionType.CLEAR_DATA});

@@ -38,6 +38,18 @@ const PostList = props => {
   useEffect(() => {
     //props.getPosts();
     props.infinite(props.currentPage);
+    window.onscroll = function() {
+      var d = document.documentElement;
+      var offset = Math.round(d.scrollTop + window.innerHeight);
+      var height = d.offsetHeight;
+
+      console.log("offset = " + offset);
+      console.log("height = " + height);
+
+      if (offset === height) {
+        console.log("At the bottom");
+      }
+    };
   }, []); //when component mounted, fetch posts
 
   return props.loading ? (

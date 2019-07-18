@@ -12,12 +12,25 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionType.CLEAR_DATA:
+      return {
+        ...state,
+        posts: [],
+        currentPost: "",
+        comments: [],
+        postChanged: false,
+        loading: false,
+        commentLoadiing: false,
+        currentPage: 0,
+        totalPages: null
+      };
     case actionType.INFINITY_OKAY:
       return {
         ...state,
         posts: [...state.posts, action.post],
         currentPage: (state.currentPage += 1),
-        totalPages: action.post.totalPages
+        totalPages: action.post.totalPages,
+        loading: false
       };
     case actionType.ADD_COMMENT_START:
       return {
@@ -55,6 +68,7 @@ const reducer = (state = initialState, action) => {
       };
     case actionType.GET_POSTS_START:
     case actionType.UPLOAD_START:
+    case actionType.INFINITY_START:
       return {
         ...state,
         loading: true
