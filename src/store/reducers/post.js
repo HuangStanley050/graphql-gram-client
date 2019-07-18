@@ -5,11 +5,20 @@ const initialState = {
   comments: [],
   postChanged: false,
   loading: false,
-  commentLoading: false
+  commentLoading: false,
+  currentPage: 0,
+  totalPages: null
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionType.INFINITY_OKAY:
+      return {
+        ...state,
+        posts: [...state.posts, action.post],
+        currentPage: (state.currentPage += 1),
+        totalPages: action.post.totalPages
+      };
     case actionType.ADD_COMMENT_START:
       return {
         ...state,

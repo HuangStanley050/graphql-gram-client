@@ -4,7 +4,7 @@ import {get_posts_start} from "../store/actions/postActions";
 import {connect} from "react-redux";
 import {Container} from "reactstrap";
 import PictureModal from "./pictureModal";
-import {current_post} from "../store/actions/postActions";
+import {current_post, infinity_fetch_start} from "../store/actions/postActions";
 import {get_comments_start} from "../store/actions/commentActions";
 import store from "../storeSetup";
 import Loader from "./loader";
@@ -23,6 +23,7 @@ const handleChange = () => {
     store.dispatch({type: "POST_CHANGED"});
   }
 };
+
 const PostList = props => {
   const [modal, setModal] = useState(false);
   //const [post,setPost]=useState("");
@@ -35,7 +36,8 @@ const PostList = props => {
   };
 
   useEffect(() => {
-    props.getPosts();
+    //props.getPosts();
+    props.infinite(props.currentPage);
   }, []); //when component mounted, fetch posts
 
   return props.loading ? (
@@ -63,7 +65,8 @@ const mapStateToProps = state => {
     loading: state.post.loading,
     currentPostId: state.post.currentPost,
     postChanged: state.post.postChanged,
-    comments: state.post.comments
+    comments: state.post.comments,
+    currentPage: state.post.currentPage
   };
 };
 
@@ -71,7 +74,8 @@ const mapDispatchToProps = dispatch => {
   return {
     getPosts: () => dispatch(get_posts_start()),
     setCurrentPost: postId => dispatch(current_post(postId)),
-    getComments: () => dispatch(get_comments_start())
+    getComments: () => dispatch(get_comments_start()),
+    infinite: currentPage => dispatch(infinity_fetch_start(currentPage))
   };
 };
 

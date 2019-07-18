@@ -52,7 +52,7 @@ class Header extends Component {
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink onClick={this.logoutHandler} tag={Link}>
+          <NavLink onClick={this.logoutHandler} tag={Link} to="#">
             Logout
           </NavLink>
         </NavItem>

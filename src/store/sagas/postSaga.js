@@ -1,14 +1,15 @@
-import { takeEvery, put, select } from "redux-saga/effects";
+import {takeEvery, put, select} from "redux-saga/effects";
 import * as actionType from "../actions/actionTypes";
 import {
   get_posts_okay,
   get_posts_fail,
-  add_comment_okay
+  add_comment_okay,
+  infinity_fetch_okay
 } from "../actions/postActions";
-import { upload_okay } from "../actions/uploadActions";
+import {upload_okay} from "../actions/uploadActions";
 import API from "../../constants/API";
 import axios from "axios";
-import { getUserId, getCurrentPost } from "./getState";
+import {getUserId, getCurrentPost} from "./getState";
 const api_path = API.api_path;
 const upload_path = API.upload_path;
 
@@ -16,6 +17,32 @@ function* postSagaWatcher() {
   yield takeEvery(actionType.GET_POSTS_START, postSagaWorker);
   yield takeEvery(actionType.UPLOAD_START, uploadSagaWorker);
   yield takeEvery(actionType.ADD_COMMENT_START, commentSagaWorker);
+  yield takeEvery(actionType.INFINITY_START, infinitySagaWorker);
+}
+
+function* infinitySagaWorker(action) {
+  const token = localStorage.getItem("graphgram-token");
+  let page = action.page;
+  let result = yield axios({
+    headers: {authorization: "bearer " + token},
+    method: "post",
+    url: api_path,
+    data: {
+      query: `
+           query {
+             infinity(data:{page:${page}}){
+               fileName
+               postId
+               download
+               totalPages
+             }
+           }
+
+      `
+    }
+  });
+  console.log(result.data.data.infinity);
+  yield put(infinity_fetch_okay(result.data.data.infinity));
 }
 
 function* commentSagaWorker(action) {
@@ -52,6 +79,7 @@ function* commentSagaWorker(action) {
     console.log(err);
   }
 }
+
 function* uploadSagaWorker(action) {
   const token = localStorage.getItem("graphgram-token");
   try {
