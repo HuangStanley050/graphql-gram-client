@@ -24,9 +24,29 @@ const handleChange = () => {
   }
 };
 
+const handleScroll = setIsFetching => {
+  window.onscroll = function() {
+    var d = document.documentElement;
+    var offset = Math.round(d.scrollTop + window.innerHeight);
+    var height = d.offsetHeight;
+
+    // console.log("offset = " + offset);
+    // console.log("height = " + height);
+
+    if (offset === height) {
+      console.log("At the bottom");
+      //props.infinite(props.currentPage);
+      setIsFetching(true);
+    } else {
+      setIsFetching(false);
+    }
+  };
+};
+
 const PostList = props => {
   const [modal, setModal] = useState(false);
-  //const [post,setPost]=useState("");
+  const [isFetching, setIsFetching] = useState(false);
+
   store.subscribe(handleChange);
 
   const toggle = postId => {
@@ -38,19 +58,14 @@ const PostList = props => {
   useEffect(() => {
     //props.getPosts();
     props.infinite(props.currentPage);
-    window.onscroll = function() {
-      var d = document.documentElement;
-      var offset = Math.round(d.scrollTop + window.innerHeight);
-      var height = d.offsetHeight;
 
-      console.log("offset = " + offset);
-      console.log("height = " + height);
-
-      if (offset === height) {
-        console.log("At the bottom");
-      }
-    };
+    handleScroll(setIsFetching);
   }, []); //when component mounted, fetch posts
+
+  useEffect(() => {
+    if (!isFetching) return;
+    props.infinite(props.currentPage);
+  }, [isFetching]);
 
   return props.loading ? (
     <Loader />
