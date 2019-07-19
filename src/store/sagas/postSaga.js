@@ -9,7 +9,12 @@ import {
 import {upload_okay} from "../actions/uploadActions";
 import API from "../../constants/API";
 import axios from "axios";
-import {getUserId, getCurrentPost} from "./getState";
+import {
+  getUserId,
+  getCurrentPost
+  //getPageStatus,
+  //getTotalPages
+} from "./getState";
 const api_path = API.api_path;
 const upload_path = API.upload_path;
 
@@ -23,6 +28,7 @@ function* postSagaWatcher() {
 function* infinitySagaWorker(action) {
   const token = localStorage.getItem("graphgram-token");
   let page = action.page;
+
   let result = yield axios({
     headers: {authorization: "bearer " + token},
     method: "post",
@@ -41,7 +47,7 @@ function* infinitySagaWorker(action) {
       `
     }
   });
-  console.log(result.data.data.infinity);
+  //console.log(result.data.data.infinity);
   yield put(infinity_fetch_okay(result.data.data.infinity));
 }
 

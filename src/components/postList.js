@@ -1,11 +1,14 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Post from "./post";
-import {get_posts_start} from "../store/actions/postActions";
-import {connect} from "react-redux";
-import {Container} from "reactstrap";
+import { get_posts_start } from "../store/actions/postActions";
+import { connect } from "react-redux";
+import { Container } from "reactstrap";
 import PictureModal from "./pictureModal";
-import {current_post, infinity_fetch_start} from "../store/actions/postActions";
-import {get_comments_start} from "../store/actions/commentActions";
+import {
+  current_post,
+  infinity_fetch_start
+} from "../store/actions/postActions";
+import { get_comments_start } from "../store/actions/commentActions";
 import store from "../storeSetup";
 import Loader from "./loader";
 
@@ -20,7 +23,7 @@ const handleChange = () => {
   currentValue = select(store.getState());
 
   if (previousValue !== currentValue) {
-    store.dispatch({type: "POST_CHANGED"});
+    store.dispatch({ type: "POST_CHANGED" });
   }
 };
 
@@ -64,6 +67,12 @@ const PostList = props => {
 
   useEffect(() => {
     if (!isFetching) return;
+    const state = store.getState();
+    let currentPage = state.post.currentPage;
+    let totalPages = state.post.totalPages;
+    // console.log("current page: ", currentPage);
+    // console.log("toal pages: ", totalPages);
+    if (currentPage >= totalPages) return;
     props.infinite(props.currentPage);
   }, [isFetching]);
 
