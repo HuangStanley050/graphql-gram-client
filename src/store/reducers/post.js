@@ -25,7 +25,7 @@ const reducer = (state = initialState, action) => {
         totalPages: null
       };
     case actionType.INFINITY_OKAY:
-      console.log(state.currentPage);
+      //console.log(state.currentPage);
       return {
         ...state,
         posts: [...state.posts, action.post],

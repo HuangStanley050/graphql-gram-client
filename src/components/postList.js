@@ -57,9 +57,15 @@ const PostList = props => {
   };
 
   const scrollToBottom = () => {
-    console.log("scrolling is running");
-
-    postEndRef.current.scrollIntoView({behavior: "smooth"});
+    console.log("scrolling to the bottom running");
+    console.log(postEndRef);
+    console.log(postEndRef.current);
+    // let end = document.getElementsByClassName("currentPoststop");
+    // console.log(end);
+    let end = postEndRef.current;
+    //console.log(end.innerHTML);
+    end.scrollIntoView(true);
+    //postEndRef.current.style = "background-color: green;";
   };
 
   useEffect(() => {
@@ -82,17 +88,17 @@ const PostList = props => {
     scrollToBottom();
   }, [isFetching]);
 
-  return props.loading ? (
-    <Loader />
-  ) : (
-    <Container>
+  return (
+    <Container style={{overFlow: "auto"}}>
       {props.posts.map(post => {
         let postId = post.postId;
         return (
           <Post modalToggle={() => toggle(postId)} key={postId} data={post} />
         );
       })}
-      <div ref={postEndRef} className="currentPostStop" />
+      <div ref={postEndRef} className="currentPostStop">
+        breakpoint
+      </div>
       <PictureModal
         postId={props.currentPostId}
         modalStatus={modal}
@@ -115,7 +121,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getPosts: () => dispatch(get_posts_start()),
+    //getPosts: () => dispatch(get_posts_start()),
     setCurrentPost: postId => dispatch(current_post(postId)),
     getComments: () => dispatch(get_comments_start()),
     infinite: currentPage => dispatch(infinity_fetch_start(currentPage))
