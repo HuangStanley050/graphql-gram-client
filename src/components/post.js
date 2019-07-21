@@ -1,14 +1,7 @@
 import React from "react";
-import { Row, Col } from "reactstrap";
+import {Row, Col} from "reactstrap";
 
-import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  Button
-} from "reactstrap";
+import {Card, CardImg, CardText, CardBody, CardTitle, Button} from "reactstrap";
 
 const Post = props => {
   const imageStyle = {
@@ -16,8 +9,8 @@ const Post = props => {
     height: "700px"
   };
   return (
-    <Row style={{ marginBottom: "2rem" }}>
-      <Col xs="12" md={{ size: 8, offset: 2 }}>
+    <Row style={{marginBottom: "2rem"}}>
+      <Col xs="12" md={{size: 8, offset: 2}}>
         <Card>
           <CardImg
             id="image_post"

@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState, useRef} from "react";
 import Post from "./post";
-import { get_posts_start } from "../store/actions/postActions";
-import { connect } from "react-redux";
-import { Container } from "reactstrap";
+import {get_posts_start} from "../store/actions/postActions";
+import {connect} from "react-redux";
+import {Container} from "reactstrap";
 import PictureModal from "./pictureModal";
-import {
-  current_post,
-  infinity_fetch_start
-} from "../store/actions/postActions";
-import { get_comments_start } from "../store/actions/commentActions";
+import {current_post, infinity_fetch_start} from "../store/actions/postActions";
+import {get_comments_start} from "../store/actions/commentActions";
 import store from "../storeSetup";
 import Loader from "./loader";
 
@@ -23,7 +20,7 @@ const handleChange = () => {
   currentValue = select(store.getState());
 
   if (previousValue !== currentValue) {
-    store.dispatch({ type: "POST_CHANGED" });
+    store.dispatch({type: "POST_CHANGED"});
   }
 };
 
@@ -37,7 +34,7 @@ const handleScroll = setIsFetching => {
     // console.log("height = " + height);
 
     if (offset === height) {
-      console.log("At the bottom");
+      //console.log("At the bottom");
       //props.infinite(props.currentPage);
       setIsFetching(true);
     } else {
@@ -49,6 +46,7 @@ const handleScroll = setIsFetching => {
 const PostList = props => {
   const [modal, setModal] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
+  const postEndRef = useRef(null);
 
   store.subscribe(handleChange);
 
@@ -56,6 +54,12 @@ const PostList = props => {
     setModal(!modal);
     props.setCurrentPost(postId);
     props.getComments();
+  };
+
+  const scrollToBottom = () => {
+    console.log("scrolling is running");
+
+    postEndRef.current.scrollIntoView({behavior: "smooth"});
   };
 
   useEffect(() => {
@@ -72,8 +76,10 @@ const PostList = props => {
     let totalPages = state.post.totalPages;
     // console.log("current page: ", currentPage);
     // console.log("toal pages: ", totalPages);
-    if (currentPage >= totalPages) return;
+    if (currentPage >= totalPages) return; //that means no more posts left to be fetched from the server
+
     props.infinite(props.currentPage);
+    scrollToBottom();
   }, [isFetching]);
 
   return props.loading ? (
@@ -86,6 +92,7 @@ const PostList = props => {
           <Post modalToggle={() => toggle(postId)} key={postId} data={post} />
         );
       })}
+      <div ref={postEndRef} className="currentPostStop" />
       <PictureModal
         postId={props.currentPostId}
         modalStatus={modal}
