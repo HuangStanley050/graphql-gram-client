@@ -1,11 +1,14 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Post from "./post";
-import {get_posts_start} from "../store/actions/postActions";
-import {connect} from "react-redux";
-import {Container} from "reactstrap";
+import { get_posts_start } from "../store/actions/postActions";
+import { connect } from "react-redux";
+import { Container } from "reactstrap";
 import PictureModal from "./pictureModal";
-import {current_post, infinity_fetch_start} from "../store/actions/postActions";
-import {get_comments_start} from "../store/actions/commentActions";
+import {
+  current_post,
+  infinity_fetch_start
+} from "../store/actions/postActions";
+import { get_comments_start } from "../store/actions/commentActions";
 import store from "../storeSetup";
 import Loader from "./loader";
 
@@ -20,7 +23,7 @@ const handleChange = () => {
   currentValue = select(store.getState());
 
   if (previousValue !== currentValue) {
-    store.dispatch({type: "POST_CHANGED"});
+    store.dispatch({ type: "POST_CHANGED" });
   }
 };
 
@@ -57,9 +60,9 @@ const PostList = props => {
   };
 
   const scrollToBottom = () => {
-    console.log("scrolling to the bottom running");
-    console.log(postEndRef);
-    console.log(postEndRef.current);
+    // console.log("scrolling to the bottom running");
+    // console.log(postEndRef);
+    // console.log(postEndRef.current);
     // let end = document.getElementsByClassName("currentPoststop");
     // console.log(end);
     let end = postEndRef.current;
@@ -89,7 +92,7 @@ const PostList = props => {
   }, [isFetching]);
 
   return (
-    <Container style={{overFlow: "auto"}}>
+    <Container style={{ overFlow: "auto" }}>
       {props.loading ? <Loader /> : null}
       {props.posts.map(post => {
         let postId = post.postId;

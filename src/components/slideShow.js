@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {connect} from "react-redux";
+import {get_ownFiles_start} from "../store/actions/ownFilesActions";
 import {
   Carousel,
   CarouselItem,
@@ -9,7 +10,20 @@ import {
 } from "reactstrap";
 
 const SlideShow = props => {
-  return null;
+  props.getFiles(props.userId);
+  return <h1>Slide show</h1>;
 };
-
-export default Slideshow;
+const mapDispatchToProps = dispatch => {
+  return {
+    getFiles: id => dispatch(get_ownFiles_start(id))
+  };
+};
+const mapStateToProps = state => {
+  return {
+    userId: state.auth.userData.userId
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SlideShow);
