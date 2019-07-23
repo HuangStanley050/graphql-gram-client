@@ -2,6 +2,7 @@ import {createStore, applyMiddleware, compose, combineReducers} from "redux";
 import createSagaMiddleware from "redux-saga";
 import authReducer from "./store/reducers/auth";
 import postReducer from "./store/reducers/post";
+import personalReducer from "./store/reducers/personal";
 import rootSaga from "./store/sagas/";
 
 const composeEnhancers =
@@ -11,7 +12,8 @@ const composeEnhancers =
 const sagaMiddleware = createSagaMiddleware();
 const rootReducer = combineReducers({
   auth: authReducer,
-  post: postReducer
+  post: postReducer,
+  personal: personalReducer
 });
 
 const store = createStore(
