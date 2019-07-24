@@ -6,7 +6,20 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  return state;
+  switch (action.type) {
+    case actionType.CLEAR_DATA:
+      return {
+        ...state,
+        files: []
+      };
+    case actionType.GET_OWN_FILES_OKAY:
+      return {
+        ...state,
+        files: [...action.data]
+      };
+    default:
+      return state;
+  }
 };
 
 export default reducer;

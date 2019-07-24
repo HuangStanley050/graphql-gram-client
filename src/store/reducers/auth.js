@@ -4,7 +4,8 @@ const initialState = {
   isAuth: false,
   userData: {
     userId: "",
-    email: ""
+    email: "",
+    name: ""
   },
   isRegistered: false,
   loading: false
@@ -40,7 +41,12 @@ const reducer = (state = initialState, action) => {
       localStorage.removeItem("graphgram-token");
       return {
         ...state,
-        isAuth: false
+        isAuth: false,
+        userData: {
+          userId: "",
+          email: "",
+          name: ""
+        }
       };
     default:
       return state;

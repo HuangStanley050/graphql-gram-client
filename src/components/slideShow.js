@@ -1,13 +1,12 @@
-import React, {Component} from "react";
-import {connect} from "react-redux";
-import {get_ownFiles_start} from "../store/actions/ownFilesActions";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { get_ownFiles_start } from "../store/actions/ownFilesActions";
 import {
   Carousel,
   CarouselItem,
   CarouselControl,
   CarouselIndicators,
-  CarouselCaption,
-  UncontrolledCarousel
+  CarouselCaption
 } from "reactstrap";
 
 const items = [
@@ -35,7 +34,9 @@ class SlideShow extends Component {
   state = {
     activeIndex: 0
   };
-
+  componentDidMount() {
+    this.props.getFiles(this.props.userId);
+  }
   onExiting = () => (this.animating = true);
   onExited = () => (this.animating = false);
   next = () => {
@@ -45,7 +46,7 @@ class SlideShow extends Component {
         ? 0
         : this.state.activeIndex + 1;
 
-    this.setState({activeIndex: nextIndex});
+    this.setState({ activeIndex: nextIndex });
   };
   previous = () => {
     if (this.animating) return;
@@ -53,16 +54,16 @@ class SlideShow extends Component {
       this.state.activeIndex === 0
         ? items.length - 1
         : this.state.activeIndex - 1;
-    this.setState({activeIndex: nextIndex});
+    this.setState({ activeIndex: nextIndex });
   };
   goToIndex = newIndex => {
     if (this.animating) return;
 
-    this.setState({activeIndex: newIndex});
+    this.setState({ activeIndex: newIndex });
   };
 
   render() {
-    const {activeIndex} = this.state;
+    const { activeIndex } = this.state;
     const slides = items.map(item => {
       return (
         <CarouselItem
@@ -102,7 +103,7 @@ class SlideShow extends Component {
         />
       </Carousel>
     );
-    const uncontrolledCaro = <UncontrolledCarousel items={items} />;
+    //const uncontrolledCaro = <UncontrolledCarousel items={items} />;
     return controlledCaro;
   }
 }
