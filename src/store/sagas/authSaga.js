@@ -41,7 +41,8 @@ function* registerSagaWorker(action) {
 
     yield put(register_okay());
   } catch (err) {
-    console.log(err);
+    //console.log(err);
+    yield put(register_fail());
   }
 }
 
