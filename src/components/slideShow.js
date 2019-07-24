@@ -69,11 +69,11 @@ class SlideShow extends Component {
         <CarouselItem
           onExiting={this.onExiting}
           onExited={this.onExited}
-          key={item.src}
+          key={item.fileName}
         >
           <img className="w-100" src={item.download} alt={item.altText} />
           <CarouselCaption
-            captionText={item.caption}
+            captionText={item.fileName}
             captionHeader={item.caption}
           />
         </CarouselItem>

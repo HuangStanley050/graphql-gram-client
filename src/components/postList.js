@@ -60,35 +60,38 @@ const PostList = props => {
   };
 
   const scrollToBottom = () => {
-    // console.log("scrolling to the bottom running");
-    // console.log(postEndRef);
-    // console.log(postEndRef.current);
-    // let end = document.getElementsByClassName("currentPoststop");
-    // console.log(end);
     let end = postEndRef.current;
-    //console.log(end.innerHTML);
     end.scrollIntoView(true);
-    //postEndRef.current.style = "background-color: green;";
   };
 
   useEffect(() => {
-    //props.getPosts();
-    props.infinite(props.currentPage);
+    const abortController = new AbortController(); //clean up
+    const signal = abortController.signal; //clean up
 
+    props.infinite(props.currentPage);
     handleScroll(setIsFetching);
+
+    return function cleanup() {
+      abortController.abort();
+    };
   }, []); //when component mounted, fetch posts
 
   useEffect(() => {
+    const abortController = new AbortController(); //clean up
+    const signal = abortController.signal; //clean up
+
     if (!isFetching) return;
     const state = store.getState();
     let currentPage = state.post.currentPage;
     let totalPages = state.post.totalPages;
-    // console.log("current page: ", currentPage);
-    // console.log("toal pages: ", totalPages);
     if (currentPage >= totalPages) return; //that means no more posts left to be fetched from the server
 
     props.infinite(props.currentPage);
     scrollToBottom();
+
+    return function cleanup() {
+      abortController.abort();
+    };
   }, [isFetching]);
 
   return (
