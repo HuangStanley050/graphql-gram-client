@@ -1,4 +1,4 @@
-import {takeEvery, put, select} from "redux-saga/effects";
+import { takeEvery, put, select } from "redux-saga/effects";
 import * as actionType from "../actions/actionTypes";
 import {
   get_posts_okay,
@@ -6,7 +6,7 @@ import {
   add_comment_okay,
   infinity_fetch_okay
 } from "../actions/postActions";
-import {upload_okay} from "../actions/uploadActions";
+import { upload_okay } from "../actions/uploadActions";
 import API from "../../constants/API";
 import axios from "axios";
 import {
@@ -28,27 +28,35 @@ function* postSagaWatcher() {
 function* infinitySagaWorker(action) {
   const token = localStorage.getItem("graphgram-token");
   let page = action.page;
-
-  let result = yield axios({
-    headers: {authorization: "bearer " + token},
-    method: "post",
-    url: api_path,
-    data: {
-      query: `
-           query {
-             infinity(data:{page:${page}}){
-               fileName
-               postId
-               download
-               totalPages
+  console.log(action.cToken);
+  try {
+    let result = yield axios({
+      headers: { authorization: "bearer " + token },
+      method: "post",
+      url: api_path,
+      data: {
+        query: `
+             query {
+               infinity(data:{page:${page}}){
+                 fileName
+                 postId
+                 download
+                 totalPages
+               }
              }
-           }
 
-      `
+        `
+      },
+      cancelToken: action.cToken.token
+    });
+    //console.log(result.data.data.infinity);
+    yield put(infinity_fetch_okay(result.data.data.infinity));
+  } catch (err) {
+    if (axios.isCancel(err)) {
+      console.log("unmounted and cancelled");
     }
-  });
-  //console.log(result.data.data.infinity);
-  yield put(infinity_fetch_okay(result.data.data.infinity));
+    console.log(err);
+  }
 }
 
 function* commentSagaWorker(action) {

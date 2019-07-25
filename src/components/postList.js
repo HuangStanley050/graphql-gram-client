@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import Post from "./post";
+import axios from "axios";
 import { get_posts_start } from "../store/actions/postActions";
 import { connect } from "react-redux";
 import { Container } from "reactstrap";
@@ -65,20 +66,20 @@ const PostList = props => {
   };
 
   useEffect(() => {
-    const abortController = new AbortController(); //clean up
-    const signal = abortController.signal; //clean up
-
-    props.infinite(props.currentPage);
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
+    //const cToken = { cancelToken: source.token };
+    props.infinite(props.currentPage, { cancelToken: source.token });
     handleScroll(setIsFetching);
-
-    return function cleanup() {
-      abortController.abort();
+    return () => {
+      source.cancel();
     };
   }, []); //when component mounted, fetch posts
 
   useEffect(() => {
-    const abortController = new AbortController(); //clean up
-    const signal = abortController.signal; //clean up
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
+    //const cToken = { cancelToken: source.token };
 
     if (!isFetching) return;
     const state = store.getState();
@@ -86,11 +87,10 @@ const PostList = props => {
     let totalPages = state.post.totalPages;
     if (currentPage >= totalPages) return; //that means no more posts left to be fetched from the server
 
-    props.infinite(props.currentPage);
+    props.infinite(props.currentPage, { cancelToken: source.token });
     scrollToBottom();
-
-    return function cleanup() {
-      abortController.abort();
+    return () => {
+      source.cancel();
     };
   }, [isFetching]);
 
@@ -129,7 +129,8 @@ const mapDispatchToProps = dispatch => {
     //getPosts: () => dispatch(get_posts_start()),
     setCurrentPost: postId => dispatch(current_post(postId)),
     getComments: () => dispatch(get_comments_start()),
-    infinite: currentPage => dispatch(infinity_fetch_start(currentPage))
+    infinite: (currentPage, cToken) =>
+      dispatch(infinity_fetch_start(currentPage, cToken))
   };
 };
 
