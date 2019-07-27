@@ -28,7 +28,7 @@ function* postSagaWatcher() {
 function* infinitySagaWorker(action) {
   const token = localStorage.getItem("graphgram-token");
   let page = action.page;
-  console.log(action.cToken);
+  //console.log(action.cToken);
   try {
     let result = yield axios({
       headers: { authorization: "bearer " + token },
@@ -46,15 +46,14 @@ function* infinitySagaWorker(action) {
              }
 
         `
-      },
-      cancelToken: action.cToken.token
+      }
     });
     //console.log(result.data.data.infinity);
     yield put(infinity_fetch_okay(result.data.data.infinity));
   } catch (err) {
-    if (axios.isCancel(err)) {
-      console.log("unmounted and cancelled");
-    }
+    // if (axios.isCancel(err)) {
+    //   console.log("unmounted and cancelled");
+    // }
     console.log(err);
   }
 }

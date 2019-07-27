@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Post from "./post";
-import axios from "axios";
-import { get_posts_start } from "../store/actions/postActions";
+//import axios from "axios";
+//import { get_posts_start } from "../store/actions/postActions";
 import { connect } from "react-redux";
 import { Container } from "reactstrap";
 import PictureModal from "./pictureModal";
@@ -66,19 +66,20 @@ const PostList = props => {
   };
 
   useEffect(() => {
-    const CancelToken = axios.CancelToken;
-    const source = CancelToken.source();
+    // const CancelToken = axios.CancelToken;
+    // const source = CancelToken.source();
     //const cToken = { cancelToken: source.token };
-    props.infinite(props.currentPage, { cancelToken: source.token });
+    props.infinite(props.currentPage);
     handleScroll(setIsFetching);
     return () => {
-      source.cancel();
+      console.log("unmounted from componentdidmount");
+      //source.cancel();
     };
   }, []); //when component mounted, fetch posts
 
   useEffect(() => {
-    const CancelToken = axios.CancelToken;
-    const source = CancelToken.source();
+    // const CancelToken = axios.CancelToken;
+    // const source = CancelToken.source();
     //const cToken = { cancelToken: source.token };
 
     if (!isFetching) return;
@@ -87,10 +88,11 @@ const PostList = props => {
     let totalPages = state.post.totalPages;
     if (currentPage >= totalPages) return; //that means no more posts left to be fetched from the server
 
-    props.infinite(props.currentPage, { cancelToken: source.token });
+    props.infinite(props.currentPage);
     scrollToBottom();
     return () => {
-      source.cancel();
+      console.log("unmounted from componentdidupdate");
+      // source.cancel();
     };
   }, [isFetching]);
 
@@ -129,8 +131,7 @@ const mapDispatchToProps = dispatch => {
     //getPosts: () => dispatch(get_posts_start()),
     setCurrentPost: postId => dispatch(current_post(postId)),
     getComments: () => dispatch(get_comments_start()),
-    infinite: (currentPage, cToken) =>
-      dispatch(infinity_fetch_start(currentPage, cToken))
+    infinite: currentPage => dispatch(infinity_fetch_start(currentPage))
   };
 };
 

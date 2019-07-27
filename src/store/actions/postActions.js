@@ -26,10 +26,9 @@ export const get_posts_okay = posts => ({
 
 export const get_posts_fail = () => {};
 
-export const infinity_fetch_start = (page, cToken) => ({
+export const infinity_fetch_start = page => ({
   type: actionType.INFINITY_START,
-  page,
-  cToken
+  page
 });
 export const infinity_fetch_okay = post => ({
   type: actionType.INFINITY_OKAY,
