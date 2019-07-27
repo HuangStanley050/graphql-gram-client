@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import Post from "./post";
-//import axios from "axios";
-//import { get_posts_start } from "../store/actions/postActions";
+
 import { connect } from "react-redux";
 import { Container } from "reactstrap";
 import PictureModal from "./pictureModal";
@@ -66,33 +65,36 @@ const PostList = props => {
   };
 
   useEffect(() => {
-    // const CancelToken = axios.CancelToken;
-    // const source = CancelToken.source();
-    //const cToken = { cancelToken: source.token };
-    props.infinite(props.currentPage);
+    let _isMounted = true;
+
+    if (_isMounted) {
+      props.infinite(props.currentPage);
+    }
+
     handleScroll(setIsFetching);
     return () => {
       console.log("unmounted from componentdidmount");
-      //source.cancel();
+      _isMounted = false;
     };
   }, []); //when component mounted, fetch posts
 
   useEffect(() => {
-    // const CancelToken = axios.CancelToken;
-    // const source = CancelToken.source();
-    //const cToken = { cancelToken: source.token };
-
+    let _isMounted = true;
     if (!isFetching) return;
+
     const state = store.getState();
     let currentPage = state.post.currentPage;
     let totalPages = state.post.totalPages;
     if (currentPage >= totalPages) return; //that means no more posts left to be fetched from the server
 
-    props.infinite(props.currentPage);
+    if (_isMounted) {
+      props.infinite(props.currentPage);
+    }
+
     scrollToBottom();
     return () => {
       console.log("unmounted from componentdidupdate");
-      // source.cancel();
+      _isMounted = false;
     };
   }, [isFetching]);
 

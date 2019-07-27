@@ -51,9 +51,6 @@ function* infinitySagaWorker(action) {
     //console.log(result.data.data.infinity);
     yield put(infinity_fetch_okay(result.data.data.infinity));
   } catch (err) {
-    // if (axios.isCancel(err)) {
-    //   console.log("unmounted and cancelled");
-    // }
     console.log(err);
   }
 }
