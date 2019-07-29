@@ -29,9 +29,9 @@ const handleChange = () => {
 
 const handleScroll = setIsFetching => {
   window.onscroll = function() {
-    var d = document.documentElement;
-    var offset = Math.round(d.scrollTop + window.innerHeight);
-    var height = d.offsetHeight;
+    let d = document.documentElement;
+    let offset = Math.round(d.scrollTop + window.innerHeight);
+    let height = d.offsetHeight;
 
     // console.log("offset = " + offset);
     // console.log("height = " + height);
@@ -69,12 +69,13 @@ const PostList = props => {
 
     if (_isMounted) {
       props.infinite(props.currentPage);
+      handleScroll(setIsFetching);
     }
 
-    handleScroll(setIsFetching);
     return () => {
       console.log("unmounted from componentdidmount");
       _isMounted = false;
+      window.onscroll = null;
     };
   }, []); //when component mounted, fetch posts
 
@@ -94,6 +95,7 @@ const PostList = props => {
     scrollToBottom();
     return () => {
       console.log("unmounted from componentdidupdate");
+
       _isMounted = false;
     };
   }, [isFetching]);
