@@ -10,7 +10,7 @@ class SlideShow extends Component {
   }
   render() {
     const slides = this.props.files.map(file => (
-      <div key={file.fileName}>
+      <div className="slideshow" key={file.fileName}>
         <img alt="slideshow_picture" src={file.download} />
         <p className="legend">{file.fileName}</p>
       </div>
@@ -19,7 +19,12 @@ class SlideShow extends Component {
       <Container>
         <Row>
           <Col xs="12" md={{ size: 8, offset: 2 }}>
-            <Carousel autoPlay infiniteLoop showArrows>
+            <Carousel
+              showThumbs={true}
+              autoPlay={true}
+              infiniteLoop={true}
+              showArrows={true}
+            >
               {slides}
             </Carousel>
           </Col>

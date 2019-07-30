@@ -22,6 +22,22 @@ a.navbar-brand {
 input[type="file"] {
   display: none;
 }
+
+.carousel .thumb {
+  height: 49px;
+  object-fit: contain;
+}
+
+.slideshow {
+  width: 730px;
+  height: 410px;
+}
+@media (max-width: 600px) {
+  .slideshow {
+    width: 100%;
+    height: 100%;
+  }
+}
 @media (max-width: 600px) {
   #image_post {
     height: auto !important;
