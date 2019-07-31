@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Carousel } from "react-responsive-carousel";
 import { Container, Col, Row } from "reactstrap";
 import { connect } from "react-redux";
+import Loader from "./loader";
 import { get_ownFiles_start } from "../store/actions/ownFilesActions";
 
 class SlideShow extends Component {
@@ -18,12 +19,14 @@ class SlideShow extends Component {
     return (
       <Container>
         <Row>
+          {this.props.loading && <Loader />}
           <Col xs="12" md={{ size: 8, offset: 2 }}>
             <Carousel
               showThumbs={true}
-              autoPlay={true}
+              autoPlay
               infiniteLoop={true}
               showArrows={true}
+              stopOnHover={true}
             >
               {slides}
             </Carousel>
@@ -42,7 +45,8 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     userId: state.auth.userData.userId,
-    files: state.personal.files
+    files: state.personal.files,
+    loading: state.personal.loading
   };
 };
 

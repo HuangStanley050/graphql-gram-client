@@ -31,14 +31,14 @@ input[type="file"] {
 .slideshow {
   width: 730px;
   height: 410px;
+  object-fit: cover;
 }
 @media (max-width: 600px) {
   .slideshow {
     width: 100%;
     height: 100%;
   }
-}
-@media (max-width: 600px) {
+
   #image_post {
     height: auto !important;
     objet-fit: none !important;
