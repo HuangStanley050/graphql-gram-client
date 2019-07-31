@@ -48,6 +48,11 @@ class Header extends Component {
     const LoginLinks = () => (
       <>
         <NavItem>
+          <NavLink to="/pictures" tag={Link}>
+            Pictures
+          </NavLink>
+        </NavItem>
+        <NavItem>
           <NavLink to="/personal" tag={Link}>
             Personal
           </NavLink>

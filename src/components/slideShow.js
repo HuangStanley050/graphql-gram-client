@@ -17,17 +17,11 @@ class SlideShow extends Component {
       </div>
     ));
     return (
-      <Container>
+      <Container className="mt-5">
         <Row>
           {this.props.loading && <Loader />}
           <Col xs="12" md={{ size: 8, offset: 2 }}>
-            <Carousel
-              showThumbs={true}
-              autoPlay
-              infiniteLoop={true}
-              showArrows={true}
-              stopOnHover={true}
-            >
+            <Carousel showThumbs autoPlay showArrows stopOnHover infiniteLoop>
               {slides}
             </Carousel>
           </Col>
