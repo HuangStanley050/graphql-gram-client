@@ -25,7 +25,7 @@ export const get_posts_okay = posts => ({
 });
 
 export const get_posts_fail = () => {};
-
+export const infinity_fetch_fail = () => ({ type: actionType.INFINITY_FAIL });
 export const infinity_fetch_start = page => ({
   type: actionType.INFINITY_START,
   page

@@ -7,11 +7,16 @@ const initialState = {
   loading: false,
   commentLoading: false,
   currentPage: 0,
-  totalPages: null
+  totalPages: 0
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionType.INFINITY_FAIL:
+      return {
+        ...state,
+        loading: false
+      };
     case actionType.CLEAR_DATA:
       return {
         ...state,

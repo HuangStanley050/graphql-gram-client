@@ -4,16 +4,17 @@ import {
   get_posts_okay,
   get_posts_fail,
   add_comment_okay,
-  infinity_fetch_okay
+  infinity_fetch_okay,
+  infinity_fetch_fail
 } from "../actions/postActions";
 import { upload_okay } from "../actions/uploadActions";
 import API from "../../constants/API";
 import axios from "axios";
 import {
   getUserId,
-  getCurrentPost
-  //getPageStatus,
-  //getTotalPages
+  getCurrentPost,
+  getPageStatus,
+  getTotalPages
 } from "./getState";
 const api_path = API.api_path;
 const upload_path = API.upload_path;
@@ -29,6 +30,9 @@ function* infinitySagaWorker(action) {
   const token = localStorage.getItem("graphgram-token");
   let page = action.page;
   //console.log(action.cToken);
+  let currentPage = yield select(getPageStatus);
+  let totalPages = yield select(getTotalPages);
+
   try {
     let result = yield axios({
       headers: { authorization: "bearer " + token },
@@ -36,22 +40,22 @@ function* infinitySagaWorker(action) {
       url: api_path,
       data: {
         query: `
-             query {
-               infinity(data:{page:${page}}){
-                 fileName
-                 postId
-                 download
-                 totalPages
+               query {
+                 infinity(data:{page:${page}}){
+                   fileName
+                   postId
+                   download
+                   totalPages
+                 }
                }
-             }
 
-        `
+          `
       }
     });
     //console.log(result.data.data.infinity);
     yield put(infinity_fetch_okay(result.data.data.infinity));
   } catch (err) {
-    console.log(err);
+    yield put(infinity_fetch_fail());
   }
 }
 

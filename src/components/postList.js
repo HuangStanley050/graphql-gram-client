@@ -68,12 +68,14 @@ const PostList = props => {
     let _isMounted = true;
 
     if (_isMounted) {
+      //console.log(props.currentPage);
       props.infinite(props.currentPage);
       handleScroll(setIsFetching);
     }
 
     return () => {
-      console.log("unmounted from componentdidmount");
+      //console.log("unmounted from componentdidmount");
+
       _isMounted = false;
       window.onscroll = null;
     };
@@ -94,7 +96,7 @@ const PostList = props => {
 
     scrollToBottom();
     return () => {
-      console.log("unmounted from componentdidupdate");
+      //console.log("unmounted from componentdidupdate");
 
       _isMounted = false;
     };
