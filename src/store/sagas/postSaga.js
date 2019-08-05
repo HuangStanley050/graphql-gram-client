@@ -10,12 +10,7 @@ import {
 import { upload_okay } from "../actions/uploadActions";
 import API from "../../constants/API";
 import axios from "axios";
-import {
-  getUserId,
-  getCurrentPost,
-  getPageStatus,
-  getTotalPages
-} from "./getState";
+import { getUserId, getCurrentPost } from "./getState";
 const api_path = API.api_path;
 const upload_path = API.upload_path;
 
@@ -30,8 +25,6 @@ function* infinitySagaWorker(action) {
   const token = localStorage.getItem("graphgram-token");
   let page = action.page;
   //console.log(action.cToken);
-  let currentPage = yield select(getPageStatus);
-  let totalPages = yield select(getTotalPages);
 
   try {
     let result = yield axios({
